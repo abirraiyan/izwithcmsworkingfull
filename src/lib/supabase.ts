@@ -4,8 +4,19 @@ import { createClient } from '@supabase/supabase-js';
 const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
 const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY;
 
+// Deployment Debugging (Masked for Security)
+if (import.meta.env.PROD) {
+  console.log("SUPABASE CONFIG CHECK:", {
+    urlLength: supabaseUrl?.length || 0,
+    keyLength: supabaseAnonKey?.length || 0,
+    hasUrl: !!supabaseUrl,
+    hasKey: !!supabaseAnonKey,
+    urlPrefix: supabaseUrl?.substring(0, 8),
+  });
+}
+
 if (!supabaseUrl || !supabaseAnonKey) {
-  console.error('CRITICAL: Supabase credentials missing! Requests will fail.');
+  console.error('CRITICAL: Supabase credentials missing! Check Vercel environment variables.');
 }
 
 export const supabase = createClient(
