@@ -1,7 +1,12 @@
 import { motion } from "motion/react";
 import { Link } from "react-router-dom";
+import { SiteContent } from "../types";
 
-export default function BrandStory() {
+interface BrandStoryProps {
+  content?: SiteContent | null;
+}
+
+export default function BrandStory({ content }: BrandStoryProps) {
   return (
     <section
       id="story"
@@ -53,15 +58,15 @@ export default function BrandStory() {
                 Our Story
               </span>
               <h2 className="font-serif text-4xl md:text-5xl lg:text-6xl text-charcoal mb-8 leading-tight">
-                Where the bustle of Dhaka fades into the aroma of IZ.{" "}
-                <span className="italic font-light text-mocha">Dhaka.</span>
+                {content?.story_heading || "Where the bustle of Dhaka fades into the aroma of IZ."}{" "}
+                <span className="italic font-light text-mocha">{content?.story_highlight || "Dhaka."}</span>
               </h2>
-              <div className="space-y-6 text-charcoal/80 font-light text-lg leading-relaxed">
+              <div className="space-y-6 text-charcoal/80 font-light text-lg leading-relaxed whitespace-pre-wrap">
                 <p>
-                 We started small, fueled by a single vision: to turn "everyday" into "extraordinary." We spent countless hours sourcing the finest beans and perfecting the delicate crumb of our pastries. But more importantly, we focused on the atmosphere. We wanted a space where a student could find focus, a family could find joy, and a stranger could find a smile.
+                  {content?.story_paragraph_1 || `We started small, fueled by a single vision: to turn "everyday" into "extraordinary." We spent countless hours sourcing the finest beans and perfecting the delicate crumb of our pastries. But more importantly, we focused on the atmosphere. We wanted a space where a student could find focus, a family could find joy, and a stranger could find a smile.`}
                 </p>
                 <p>
-                  In the bustling streets of Pallabi, Mirpur, there was a missing piece—a place that didn't just serve people, but welcomed them. IZ Pâtisserie & Café was born from the idea that a neighborhood deserves a sanctuary where the air is heavy with the scent of roasted beans and the warmth of fresh pastry.
+                  {content?.story_paragraph_2 || `In the bustling streets of Pallabi, Mirpur, there was a missing piece—a place that didn't just serve people, but welcomed them. IZ Pâtisserie & Café was born from the idea that a neighborhood deserves a sanctuary where the air is heavy with the scent of roasted beans and the warmth of fresh pastry.`}
                 </p>
               </div>
 
@@ -73,20 +78,20 @@ export default function BrandStory() {
                 className="mt-12 pt-12 border-t border-charcoal/10"
               >
                 <div className="flex items-center gap-6">
-                  <div className="w-16 h-16 rounded-full overflow-hidden bg-mocha/20">
+                  <div className="w-16 h-16 rounded-full overflow-hidden bg-mocha/20 flex-shrink-0">
                     <img
-                      src="https://images.unsplash.com/photo-1583338917451-face2751d8d5?q=80&w=400&auto=format&fit=crop"
-                      alt="Head Baker"
+                      src={content?.founder_avatar || "https://images.unsplash.com/photo-1583338917451-face2751d8d5?q=80&w=400&auto=format&fit=crop"}
+                      alt={content?.founder_name || "Founder"}
                       className="w-full h-full object-cover grayscale"
                       referrerPolicy="no-referrer"
                     />
                   </div>
                   <div>
                     <p className="font-serif text-xl text-charcoal">
-                      Ibrahim Z.
+                      {content?.founder_name || "Ibrahim Z."}
                     </p>
                     <p className="text-sm tracking-widest uppercase text-charcoal/60 font-semibold">
-                      Founder & Head Baker
+                      {content?.founder_role || "Founder & Head Baker"}
                     </p>
                   </div>
                 </div>

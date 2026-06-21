@@ -1,7 +1,26 @@
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Settings } from "lucide-react";
+import { getNavigationSettings } from "../lib/site/getNavigationSettings";
 
 export default function Footer() {
+  const [izGrabUrl, setIzGrabUrl] = useState("https://grab.izcafe.com");
+
+  useEffect(() => {
+    const loadNav = async () => {
+      try {
+        const data = await getNavigationSettings();
+        const grabItem = data.find(item => item.id === 'iz-grab');
+        if (grabItem?.href) {
+          setIzGrabUrl(grabItem.href);
+        }
+      } catch (err) {
+        console.warn("Failed to load footer nav url:", err);
+      }
+    };
+    loadNav();
+  }, []);
+
   return (
     <footer className="bg-charcoal text-cream py-16 border-t border-cream/10 relative overflow-hidden">
       <div className="max-w-7xl mx-auto px-6 md:px-12">
@@ -10,9 +29,13 @@ export default function Footer() {
           <div className="text-left">
             <Link
               to="/"
-              className="font-serif text-3xl tracking-wider font-semibold text-cream mb-4 block"
+              className="flex items-center font-serif text-3xl tracking-wider font-semibold text-cream mb-4"
             >
-              IZ<span className="text-gold">.</span>
+              <img
+                src="/logo-icon.png"
+                alt="IZ Patisserie & Cafe Logo"
+                className="h-9 w-auto logo-white"
+              />
             </Link>
             <div className="space-y-2">
               <p className="text-cream/50 text-xs font-light uppercase tracking-widest">
@@ -25,7 +48,7 @@ export default function Footer() {
             </div>
           </div>
 
-          {/* Social Links */}
+          {/* Social & Delivery Links */}
           <div className="flex flex-wrap gap-8">
             <a
               href="https://instagram.com"
@@ -43,6 +66,14 @@ export default function Footer() {
             >
               Facebook
             </a>
+            <a
+              href={izGrabUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-[#c6a75e] hover:text-white transition-all duration-300 text-[11px] tracking-[0.3em] uppercase font-bold border-b border-[#c6a75e]/30 pb-0.5 hover:border-white"
+            >
+              IZ Grab Delivery
+            </a>
           </div>
         </div>
 
@@ -58,3 +89,4 @@ export default function Footer() {
     </footer>
   );
 }
+

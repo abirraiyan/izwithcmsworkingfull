@@ -17,7 +17,7 @@ import { Location } from "../types";
 import toast from "react-hot-toast";
 
 export default function LocationDetails() {
-  const { id } = useParams<{ id: string }>();
+  const { slug } = useParams<{ slug: string }>();
   const [location, setLocation] = useState<Location | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -25,7 +25,7 @@ export default function LocationDetails() {
 
   useEffect(() => {
     async function fetchLocation() {
-      if (!id) return;
+      if (!slug) return;
       try {
         setLoading(true);
         const { data, error } = await supabase
@@ -35,7 +35,7 @@ export default function LocationDetails() {
             location_tags(*),
             location_gallery(*)
           `)
-          .eq("id", id)
+          .eq("slug", slug)
           .single();
 
         if (error) throw error;
@@ -49,7 +49,7 @@ export default function LocationDetails() {
     }
 
     fetchLocation();
-  }, [id]);
+  }, [slug]);
 
   const handleShare = () => {
     if (navigator.share) {
@@ -89,7 +89,12 @@ export default function LocationDetails() {
   }
 
   return (
-    <main className="min-h-screen bg-[#f8f5f0]">
+    <motion.main 
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      className="min-h-screen bg-[#f8f5f0]"
+    >
       {/* Navigation Layer */}
       <div className="fixed top-24 left-6 md:left-12 z-40">
         <Link
@@ -158,9 +163,11 @@ export default function LocationDetails() {
             className="lg:col-span-7 space-y-12"
           >
             <div className="prose prose-xl prose-charcoal">
-              <h2 className="font-serif text-4xl text-charcoal mb-8 italic">About the Space</h2>
+              <h2 className="font-serif text-4xl text-charcoal mb-8 italic">
+                {location.about_title || "About the Space"}
+              </h2>
               <p className="text-charcoal/70 leading-relaxed font-light text-xl whitespace-pre-wrap">
-                {location.description || "Discover a sanctuary where the hustle of the city fades away, and every cup of coffee tells a story of craftsmanship and care."}
+                {location.about_content || location.description || "Discover a sanctuary where the hustle of the city fades away, and every cup of coffee tells a story of craftsmanship and care."}
               </p>
             </div>
 
@@ -202,60 +209,86 @@ export default function LocationDetails() {
               <div>
                 <h3 className="font-serif text-3xl text-charcoal italic mb-8">Details</h3>
                 <div className="space-y-8">
-                  <div className="flex gap-4">
-                    <div className="p-4 bg-[#f8f5f0] rounded-2xl text-gold">
-                      <Clock size={24} />
+                  
+                  {(location.opening_hours || location.working_hours) && (
+                    <div className="flex gap-4">
+                      <div className="p-4 bg-[#f8f5f0] rounded-2xl text-gold">
+                        <Clock size={24} />
+                      </div>
+                      <div>
+                        <p className="text-xs uppercase tracking-widest text-charcoal/40 font-bold mb-1">Trading Hours</p>
+                        <p className="text-charcoal text-lg font-medium whitespace-pre-wrap">
+                          {location.opening_hours || location.working_hours}
+                        </p>
+                      </div>
                     </div>
-                    <div>
-                      <p className="text-xs uppercase tracking-widest text-charcoal/40 font-bold mb-1">Trading Hours</p>
-                      <p className="text-charcoal text-lg font-medium">Daily: 8:30 AM – 10:30 PM</p>
-                    </div>
-                  </div>
+                  )}
 
-                  <div className="flex gap-4">
-                    <div className="p-4 bg-[#f8f5f0] rounded-2xl text-gold">
-                      <Phone size={24} />
+                  {(location.reservation_phone || location.phone_number) && (
+                    <div className="flex gap-4">
+                      <div className="p-4 bg-[#f8f5f0] rounded-2xl text-gold">
+                        <Phone size={24} />
+                      </div>
+                      <div>
+                        <p className="text-xs uppercase tracking-widest text-charcoal/40 font-bold mb-1">Reservations</p>
+                        <p className="text-charcoal text-lg font-medium">
+                          {location.reservation_phone || location.phone_number}
+                        </p>
+                      </div>
                     </div>
-                    <div>
-                      <p className="text-xs uppercase tracking-widest text-charcoal/40 font-bold mb-1">Reservations</p>
-                      <p className="text-charcoal text-lg font-medium">+880 123 456 7890</p>
-                    </div>
-                  </div>
+                  )}
 
-                  <div className="flex gap-4">
-                    <div className="p-4 bg-[#f8f5f0] rounded-2xl text-gold">
-                      <Calendar size={24} />
+                  {location.corporate_email && (
+                    <div className="flex gap-4">
+                      <div className="p-4 bg-[#f8f5f0] rounded-2xl text-gold">
+                        <Calendar size={24} />
+                      </div>
+                      <div>
+                        <p className="text-xs uppercase tracking-widest text-charcoal/40 font-bold mb-1">Corporate Booking</p>
+                        <a href={`mailto:${location.corporate_email}`} className="text-charcoal text-lg font-medium hover:text-gold transition-colors">
+                          {location.corporate_email}
+                        </a>
+                      </div>
                     </div>
-                    <div>
-                      <p className="text-xs uppercase tracking-widest text-charcoal/40 font-bold mb-1">Corporate Booking</p>
-                      <p className="text-charcoal text-lg font-medium">hello@izpatisserie.com</p>
-                    </div>
-                  </div>
+                  )}
                 </div>
               </div>
 
-              <div className="pt-10 border-t border-charcoal/5 grid grid-cols-2 gap-4">
-                <button 
-                  onClick={handleShare}
-                  className="w-full flex items-center justify-center gap-2 py-4 bg-[#f8f5f0] text-charcoal rounded-2xl font-bold uppercase tracking-widest text-[10px] hover:bg-gold hover:text-white transition-all shadow-sm"
-                >
-                  <Share2 size={16} />
-                  Share Space
-                </button>
-                <a 
-                  href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(`${location.name} ${location.address}`)}`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="w-full flex items-center justify-center gap-2 py-4 bg-charcoal text-white rounded-2xl font-bold uppercase tracking-widest text-[10px] hover:bg-mocha transition-all shadow-lg"
-                >
-                  <ExternalLink size={16} />
-                  Directions
-                </a>
+              <div className="pt-10 border-t border-charcoal/5 flex flex-col gap-4">
+                <div className="grid grid-cols-2 gap-4">
+                  <button 
+                    onClick={handleShare}
+                    className="w-full flex items-center justify-center gap-2 py-4 bg-[#f8f5f0] text-charcoal rounded-2xl font-bold uppercase tracking-widest text-[10px] hover:bg-gold hover:text-white transition-all shadow-sm"
+                  >
+                    <Share2 size={16} />
+                    Share
+                  </button>
+                  <a 
+                    href={location.directions_url || `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(`${location.name} ${location.address}`)}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-full flex items-center justify-center gap-2 py-4 bg-charcoal text-white rounded-2xl font-bold uppercase tracking-widest text-[10px] hover:bg-mocha transition-all shadow-lg"
+                  >
+                    <ExternalLink size={16} />
+                    Directions
+                  </a>
+                </div>
+                
+                {(location.reservation_url || location.reservation_link) && (
+                  <a 
+                    href={location.reservation_url || location.reservation_link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-full flex items-center justify-center gap-2 py-4 bg-gold text-white rounded-2xl font-bold uppercase tracking-widest text-xs hover:bg-[#c4a030] transition-all shadow-lg"
+                  >
+                    Book a Table
+                  </a>
+                )}
               </div>
             </div>
           </motion.div>
         </div>
       </section>
-    </main>
+    </motion.main>
   );
 }

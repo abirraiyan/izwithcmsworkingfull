@@ -9,11 +9,13 @@ import {
   X,
   Coffee,
   ChevronRight,
+  BookOpen,
   Plus,
   ImageIcon,
   Upload,
   MapPin,
-  MessageSquare
+  MessageSquare,
+  Compass
 } from "lucide-react";
 import { supabase, getMenuItems, getCategories, getGalleryItems, getLocations, getTestimonials } from "../../lib/supabase";
 import { motion, AnimatePresence } from "motion/react";
@@ -70,11 +72,15 @@ export default function AdminDashboard() {
 
   const navItems = [
     { label: "Dashboard", icon: LayoutDashboard, path: "/admin/dashboard" },
+    { label: "Website Home", icon: LayoutDashboard, path: "/admin/home" },
+    { label: "Our Story", icon: BookOpen, path: "/admin/our-story" },
+    { label: "Get To Know Us", icon: BookOpen, path: "/admin/get-to-know-us" },
     { label: "Menu Items", icon: UtensilsCrossed, path: "/admin/menu" },
     { label: "Categories", icon: Layers, path: "/admin/categories" },
     { label: "Gallery", icon: ImageIcon, path: "/admin/gallery" },
     { label: "Locations", icon: MapPin, path: "/admin/locations" },
     { label: "Testimonials", icon: MessageSquare, path: "/admin/testimonials" },
+    { label: "Navigation Settings", icon: Compass, path: "/admin/navigation" },
   ];
 
   return (

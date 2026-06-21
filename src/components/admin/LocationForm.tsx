@@ -11,14 +11,23 @@ interface LocationFormProps {
   onClose: () => void;
 }
 
-export default function LocationForm({ location, onSubmit, onClose }: LocationFormProps) {
+export default function LocationForm({ location, onSubmit: onSave, onClose }: LocationFormProps) {
   const [loading, setLoading] = useState(false);
   const [uploading, setUploading] = useState(false);
-  const [formData, setFormData] = useState({
+  const [formData, setFormData] = useState<any>({
     name: location?.name || "",
     address: location?.address || "",
     description: location?.description || "",
-    cover_image: location?.cover_image || "",
+    reservation_phone: location?.reservation_phone || "",
+    opening_hours: location?.opening_hours || "",
+    corporate_email: location?.corporate_email || "",
+    directions_url: location?.directions_url || "",
+    reservation_url: location?.reservation_url || "",
+    about_title: location?.about_title || "",
+    about_content: location?.about_content || "",
+    sort_order: location?.sort_order ?? 0,
+    is_published: location?.is_published ?? true,
+    cover_image: location?.cover_image || ""
   });
 
   const [tags, setTags] = useState<string[]>(
@@ -91,14 +100,19 @@ export default function LocationForm({ location, onSubmit, onClose }: LocationFo
 
     try {
       setLoading(true);
-      await onSubmit({
+      await onSave({
         ...formData,
         tags,
-        gallery
+        gallery,
+        updated_at: new Date().toISOString()
       });
       onClose();
     } catch (error: any) {
-      toast.error("Error saving location: " + error.message);
+      if (error.message === "Database schema needs migration. Run sync.") {
+        toast.error("Database schema needs migration. Run sync.");
+      } else {
+        toast.error("Error saving location: " + error.message);
+      }
     } finally {
       setLoading(false);
     }
@@ -147,6 +161,91 @@ export default function LocationForm({ location, onSubmit, onClose }: LocationFo
                 />
               </div>
 
+              <div className="grid grid-cols-2 gap-4">
+                <div>
+                  <label className="block text-xs font-bold uppercase tracking-widest text-gray-400 mb-2">Reservation Phone</label>
+                  <input
+                    type="text"
+                    value={formData.reservation_phone}
+                    onChange={(e) => setFormData({ ...formData, reservation_phone: e.target.value })}
+                    className="w-full bg-[#2a2a2a] border border-[#3a3a3a] rounded-2xl px-5 py-4 text-white focus:outline-none focus:border-[#d4af37] transition-all text-sm"
+                    placeholder="+880 13..."
+                  />
+                </div>
+                <div>
+                  <label className="block text-xs font-bold uppercase tracking-widest text-gray-400 mb-2">Trading Hours</label>
+                  <input
+                    type="text"
+                    value={formData.opening_hours}
+                    onChange={(e) => setFormData({ ...formData, opening_hours: e.target.value })}
+                    className="w-full bg-[#2a2a2a] border border-[#3a3a3a] rounded-2xl px-5 py-4 text-white focus:outline-none focus:border-[#d4af37] transition-all text-sm"
+                    placeholder="Daily: 8:00 AM - 11:00 PM"
+                  />
+                </div>
+              </div>
+
+              <div className="grid grid-cols-2 gap-4">
+                <div>
+                  <label className="block text-xs font-bold uppercase tracking-widest text-gray-400 mb-2">Corporate Email</label>
+                  <input
+                    type="email"
+                    value={formData.corporate_email}
+                    onChange={(e) => setFormData({ ...formData, corporate_email: e.target.value })}
+                    className="w-full bg-[#2a2a2a] border border-[#3a3a3a] rounded-2xl px-5 py-4 text-white focus:outline-none focus:border-[#d4af37] transition-all text-sm"
+                    placeholder="hello@izpatisserie.com"
+                  />
+                </div>
+                <div>
+                  <label className="block text-xs font-bold uppercase tracking-widest text-gray-400 mb-2">Directions URL</label>
+                  <input
+                    type="url"
+                    value={formData.directions_url}
+                    onChange={(e) => setFormData({ ...formData, directions_url: e.target.value })}
+                    className="w-full bg-[#2a2a2a] border border-[#3a3a3a] rounded-2xl px-5 py-4 text-white focus:outline-none focus:border-[#d4af37] transition-all text-sm"
+                    placeholder="https://maps.google.com/..."
+                  />
+                </div>
+              </div>
+
+              <div className="grid grid-cols-2 gap-4">
+                <div>
+                  <label className="block text-xs font-bold uppercase tracking-widest text-gray-400 mb-2">Reservation URL</label>
+                  <input
+                    type="url"
+                    value={formData.reservation_url}
+                    onChange={(e) => setFormData({ ...formData, reservation_url: e.target.value })}
+                    className="w-full bg-[#2a2a2a] border border-[#3a3a3a] rounded-2xl px-5 py-4 text-white focus:outline-none focus:border-[#d4af37] transition-all text-sm"
+                    placeholder="https://..."
+                  />
+                </div>
+                <div>
+                  <label className="block text-xs font-bold uppercase tracking-widest text-gray-400 mb-2">Sort Order</label>
+                  <input
+                    type="number"
+                    value={formData.sort_order}
+                    onChange={(e) => setFormData({ ...formData, sort_order: parseInt(e.target.value) || 0 })}
+                    className="w-full bg-[#2a2a2a] border border-[#3a3a3a] rounded-2xl px-5 py-4 text-white focus:outline-none focus:border-[#d4af37] transition-all text-sm"
+                    placeholder="0"
+                  />
+                </div>
+              </div>
+
+              <div className="flex items-center justify-between p-4 bg-[#2a2a2a] border border-[#3a3a3a] rounded-2xl">
+                <div>
+                  <label className="block text-sm font-bold text-white mb-1">Publish Location</label>
+                  <p className="text-xs text-gray-400">If unchecked, this location will be hidden from the guest site.</p>
+                </div>
+                <label className="relative inline-flex items-center cursor-pointer">
+                  <input
+                    type="checkbox"
+                    checked={formData.is_published}
+                    onChange={(e) => setFormData({ ...formData, is_published: e.target.checked })}
+                    className="sr-only peer"
+                  />
+                  <div className="w-11 h-6 bg-gray-700 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-[#d4af37]"></div>
+                </label>
+              </div>
+
               <div>
                 <label className="block text-xs font-bold uppercase tracking-widest text-gray-400 mb-2">Address</label>
                 <textarea
@@ -163,8 +262,29 @@ export default function LocationForm({ location, onSubmit, onClose }: LocationFo
                 <textarea
                   value={formData.description}
                   onChange={(e) => setFormData({ ...formData, description: e.target.value })}
-                  className="w-full bg-[#2a2a2a] border border-[#3a3a3a] rounded-2xl px-5 py-4 text-white focus:outline-none focus:border-[#d4af37] transition-all text-sm h-40 resize-none font-light leading-relaxed"
-                  placeholder="Tell us about this space..."
+                  className="w-full bg-[#2a2a2a] border border-[#3a3a3a] rounded-2xl px-5 py-4 text-white focus:outline-none focus:border-[#d4af37] transition-all text-sm h-24 resize-none"
+                  placeholder="Short summary for previews..."
+                />
+              </div>
+
+              <div>
+                <label className="block text-xs font-bold uppercase tracking-widest text-gray-400 mb-2">About Title</label>
+                <input
+                  type="text"
+                  value={formData.about_title}
+                  onChange={(e) => setFormData({ ...formData, about_title: e.target.value })}
+                  className="w-full bg-[#2a2a2a] border border-[#3a3a3a] rounded-2xl px-5 py-4 text-white focus:outline-none focus:border-[#d4af37] transition-all text-sm"
+                  placeholder="About the Space"
+                />
+              </div>
+
+              <div>
+                <label className="block text-xs font-bold uppercase tracking-widest text-gray-400 mb-2">About Content</label>
+                <textarea
+                  value={formData.about_content || formData.description}
+                  onChange={(e) => setFormData({ ...formData, about_content: e.target.value })}
+                  className="w-full bg-[#2a2a2a] border border-[#3a3a3a] rounded-2xl px-5 py-4 text-white focus:outline-none focus:border-[#d4af37] transition-all text-sm h-32 resize-none font-light leading-relaxed"
+                  placeholder="Discover a sanctuary..."
                 />
               </div>
 

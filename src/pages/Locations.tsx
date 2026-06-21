@@ -93,7 +93,7 @@ export default function Locations() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: idx * 0.1, duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
               >
-                <Link to={`/locations/${loc.id}`} className="group block">
+                <Link to={`/locations/${loc.slug}`} className="group block">
                   <div className="bg-white rounded-[2.5rem] overflow-hidden shadow-soft hover:shadow-xl transition-all duration-500 border border-charcoal/5">
                     {/* Image Container */}
                     <div className="relative aspect-[4/5] overflow-hidden">

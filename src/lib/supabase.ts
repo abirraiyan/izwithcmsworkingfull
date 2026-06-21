@@ -1,5 +1,6 @@
 /// <reference types="vite/client" />
 import { createClient } from '@supabase/supabase-js';
+import { clearLocationsCache } from './locations/getLocations';
 
 const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
 const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY;
@@ -151,6 +152,57 @@ export const getMenuItems = async (onlyAvailable: boolean = false) => {
     ...item,
     variants: item.item_modifiers?.map((im: any) => im.modifiers).filter(Boolean) || []
   }));
+};
+
+export const getFeaturedMenuItems = async (limit: number = 8) => {
+  const { data, error } = await supabase
+    .from('menu_items')
+    .select(`
+      id,
+      name,
+      image_url,
+      price,
+      is_available,
+      is_featured,
+      description
+    `)
+    .eq('is_available', true)
+    .eq('is_featured', true)
+    .order('created_at', { ascending: false })
+    .limit(limit);
+
+  if (error) throw error;
+  return data;
+};
+
+export const getSpecialsItems = async (limit: number = 10) => {
+  // 1. Get the category ID for SPECIALS
+  const { data: category, error: catError } = await supabase
+    .from('categories')
+    .select('id')
+    .ilike('name', 'SPECIALS')
+    .single();
+
+  if (catError || !category) return [];
+
+  // 2. Get the items
+  const { data, error } = await supabase
+    .from('menu_items')
+    .select(`
+      id,
+      name,
+      image_url,
+      price,
+      is_available,
+      description
+    `)
+    .eq('category_id', category.id)
+    .eq('is_available', true)
+    .order('created_at', { ascending: false })
+    .limit(limit);
+
+  if (error) throw error;
+  return data;
 };
 
 export const addMenuItem = async (itemData: any) => {
@@ -370,7 +422,7 @@ export const getGalleryItems = async () => {
   return data;
 };
 
-export const addGalleryItem = async (item: { title?: string; media_url: string; media_type: 'image' | 'video' }) => {
+export const addGalleryItem = async (item: { title?: string; media_url: string; media_type: 'image' | 'video'; is_featured?: boolean }) => {
   const session = await getSession();
   console.log('Current session for gallery insert:', session);
   
@@ -378,17 +430,14 @@ export const addGalleryItem = async (item: { title?: string; media_url: string; 
     throw new Error('No active session found. Please log in.');
   }
 
-  const payload = {
-    title: item.title || null,
-    media_url: item.media_url,
-    media_type: item.media_type
-  };
-
-  console.log('Inserting gallery item:', payload);
-
   const { data, error } = await supabase
     .from('gallery')
-    .insert([payload])
+    .insert([{
+      title: item.title || null,
+      media_url: item.media_url,
+      media_type: item.media_type,
+      is_featured: item.is_featured || false
+    }])
     .select()
     .single();
     
@@ -475,11 +524,14 @@ export const getLocations = async () => {
   return data;
 };
 
+import { cleanLocationPayload } from './db/cleanLocationPayload';
+
 export const addLocation = async (locationData: any) => {
   const session = await getSession();
   if (!session) throw new Error('No active session found. Please log in.');
 
-  const { tags, gallery, ...location } = locationData;
+  const cleanPayload = await cleanLocationPayload(locationData);
+  const { tags, gallery, ...location } = cleanPayload;
   const slug = location.name.toLowerCase().replace(/ /g, '-').replace(/[^\w-]+/g, '');
 
   // 1. Insert location
@@ -489,7 +541,12 @@ export const addLocation = async (locationData: any) => {
     .select()
     .single();
 
-  if (locError) throw locError;
+  if (locError) {
+    if (locError.message.includes('column')) {
+      throw new Error("Database schema needs migration. Run sync.");
+    }
+    throw locError;
+  }
 
   // 2. Insert tags
   if (tags && tags.length > 0) {
@@ -511,6 +568,7 @@ export const addLocation = async (locationData: any) => {
     if (galleryError) throw galleryError;
   }
 
+  clearLocationsCache();
   return newLocation;
 };
 
@@ -518,7 +576,8 @@ export const updateLocation = async (id: string, locationData: any) => {
   const session = await getSession();
   if (!session) throw new Error('No active session found. Please log in.');
 
-  const { tags, gallery, ...location } = locationData;
+  const cleanPayload = await cleanLocationPayload(locationData);
+  const { tags, gallery, ...location } = cleanPayload;
   const slug = location.name.toLowerCase().replace(/ /g, '-').replace(/[^\w-]+/g, '');
 
   // 1. Update location
@@ -529,7 +588,12 @@ export const updateLocation = async (id: string, locationData: any) => {
     .select()
     .single();
 
-  if (locError) throw locError;
+  if (locError) {
+    if (locError.message.includes('column')) {
+      throw new Error("Database schema needs migration. Run sync.");
+    }
+    throw locError;
+  }
 
   // 2. Update tags (delete and re-add)
   await supabase.from('location_tags').delete().eq('location_id', id);
@@ -551,6 +615,7 @@ export const updateLocation = async (id: string, locationData: any) => {
     await supabase.from('location_gallery').insert(galleryPayloads);
   }
 
+  clearLocationsCache();
   return updatedLocation;
 };
 
@@ -563,6 +628,7 @@ export const deleteLocation = async (id: string) => {
     .delete()
     .eq('id', id);
   if (error) throw error;
+  clearLocationsCache();
 };
 
 export const uploadLocationMedia = async (file: File, locationId: string = 'temp') => {
@@ -589,6 +655,57 @@ export const uploadLocationMedia = async (file: File, locationId: string = 'temp
     .from('gallery-media')
     .getPublicUrl(filePath);
     
+  return publicUrl;
+};
+
+export const uploadHeroMedia = async (file: File, folder: string = 'hero') => {
+  const session = await getSession();
+  if (!session) throw new Error('No active session found. Please log in.');
+
+  const BUCKET = 'hero-media';
+  // Use user's requested filename format
+  const fileName = `${Date.now()}-${file.name}`;
+  const filePath = `${folder}/${fileName}`;
+
+  console.log(`Attempting upload to ${BUCKET}: ${filePath}`);
+  const { data: uploadData, error: uploadError } = await supabase.storage
+    .from(BUCKET)
+    .upload(filePath, file, {
+      upsert: true,
+    });
+
+  if (uploadError) throw uploadError;
+
+  const { data: { publicUrl } } = supabase.storage.from(BUCKET).getPublicUrl(filePath);
+  return publicUrl;
+};
+
+export const uploadMedia = async (file: File, baseFolder: string = 'media') => {
+  const session = await getSession();
+  if (!session) throw new Error('No active session found. Please log in.');
+
+  const BUCKET = 'hero-media'; // Reusing existing bucket as requested
+  const isImage = file.type.startsWith('image/');
+  const typeFolder = isImage ? 'images' : 'videos';
+  
+  // Clean up folder path
+  let folder = baseFolder;
+  if (folder.endsWith('/')) folder = folder.slice(0, -1);
+  
+  const fileName = `${Date.now()}-${file.name.replace(/[^a-zA-Z0-9.-]/g, '_')}`;
+  const filePath = `${folder}/${typeFolder}/${fileName}`;
+
+  console.log(`Attempting upload to ${BUCKET}: ${filePath}`);
+  const { data: uploadData, error: uploadError } = await supabase.storage
+    .from(BUCKET)
+    .upload(filePath, file, {
+      upsert: true,
+      cacheControl: '3600',
+    });
+
+  if (uploadError) throw uploadError;
+
+  const { data: { publicUrl } } = supabase.storage.from(BUCKET).getPublicUrl(filePath);
   return publicUrl;
 };
 

@@ -15,6 +15,10 @@ import CategoryManager from "./pages/admin/CategoryManager";
 import GalleryManager from "./pages/admin/GalleryManager";
 import AdminLocations from "./pages/admin/AdminLocations";
 import AdminTestimonials from "./pages/admin/AdminTestimonials";
+import AdminHome from "./pages/admin/home";
+import AdminOurStory from "./pages/admin/our-story";
+import AdminGetToKnowUs from "./pages/admin/get-to-know-us";
+import NavigationManager from "./pages/admin/NavigationManager";
 import ProtectedRoute from "./components/ProtectedRoute";
 import { Toaster } from "react-hot-toast";
 import FloatingReserveButton from "./components/FloatingReserveButton";
@@ -46,11 +50,12 @@ function AnimatedRoutes() {
         {!isAdminRoute && <Navbar />}
         <Routes location={location}>
           <Route path="/" element={<Home />} />
+          <Route path="/menu" element={<Menu />} />
           <Route path="/our-story" element={<OurStory />} />
           <Route path="/get-to-know-us" element={<GetToKnowUs />} />
           <Route path="/locations" element={<Locations />} />
-          <Route path="/locations/:id" element={<LocationDetails />} />
-          <Route path="/menu" element={<Menu />} />
+          <Route path="/locations/:slug" element={<LocationDetails />} />
+          
           
           {/* Admin Routes */}
           <Route path="/admin/login" element={<AdminLogin />} />
@@ -64,11 +69,15 @@ function AnimatedRoutes() {
           >
             <Route index element={<Navigate to="dashboard" replace />} />
             <Route path="dashboard" element={null} /> {/* Handled by AdminDashboard default content */}
+            <Route path="home" element={<AdminHome />} />
+            <Route path="our-story" element={<AdminOurStory />} />
+            <Route path="get-to-know-us" element={<AdminGetToKnowUs />} />
             <Route path="menu" element={<MenuManager />} />
             <Route path="categories" element={<CategoryManager />} />
             <Route path="gallery" element={<GalleryManager />} />
             <Route path="locations" element={<AdminLocations />} />
             <Route path="testimonials" element={<AdminTestimonials />} />
+            <Route path="navigation" element={<NavigationManager />} />
           </Route>
           
           <Route path="*" element={<Navigate to="/" replace />} />

@@ -3,10 +3,13 @@ import { motion } from "motion/react";
 import { Location } from "../../types";
 import { getImageUrl } from "../../lib/image";
 
+import { Key } from "react";
+
 interface LocationCardProps {
+  key?: Key;
   location: Location;
   onEdit: (location: Location) => void;
-  onDelete: (id: string) => void;
+  onDelete: (id: string) => void | Promise<void>;
 }
 
 export default function LocationCard({ location, onEdit, onDelete }: LocationCardProps) {

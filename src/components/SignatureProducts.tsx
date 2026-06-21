@@ -1,40 +1,43 @@
+import { useState, useEffect } from "react";
 import { motion } from "motion/react";
 import { Link } from "react-router-dom";
-
-const products = [
-  {
-    id: 1,
-    name: "Pistachio Rose Croissant",
-    price: "৳ 450",
-    image:
-      "https://images.unsplash.com/photo-1549903072-7e6e0bedb7fb?q=80&w=800&auto=format&fit=crop",
-    tag: "Bestseller",
-  },
-  {
-    id: 2,
-    name: "Signature Basque Cheesecake",
-    price: "৳ 650",
-    image:
-      "https://images.unsplash.com/photo-1533134242443-d4fd215305ad?q=80&w=800&auto=format&fit=crop",
-  },
-  {
-    id: 3,
-    name: "Truffle Mushroom Tart",
-    price: "৳ 550",
-    image:
-      "https://images.unsplash.com/photo-1519915028121-7d3463d20b13?q=80&w=800&auto=format&fit=crop",
-  },
-  {
-    id: 4,
-    name: "Madagascar Vanilla Latte",
-    price: "৳ 380",
-    image:
-      "https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?q=80&w=800&auto=format&fit=crop",
-    tag: "New",
-  },
-];
+import { getFeaturedMenuItems } from "../lib/supabase";
+import { getImageUrl } from "../lib/image";
+import { MenuItem } from "../types";
 
 export default function SignatureProducts() {
+  const [products, setProducts] = useState<MenuItem[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchProducts = async () => {
+      try {
+        const data = await getFeaturedMenuItems(4);
+        setProducts(data as any);
+      } catch (error) {
+        console.error("Error fetching signature products:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchProducts();
+  }, []);
+
+  if (loading) {
+    return (
+      <section id="menu" className="py-24 md:py-32 bg-cream text-charcoal">
+        <div className="max-w-7xl mx-auto px-6 md:px-12">
+          <div className="h-12 w-64 bg-charcoal/10 rounded-lg animate-pulse mb-16" />
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+            {[1, 2, 3, 4].map(i => (
+              <div key={i} className="aspect-[4/5] bg-charcoal/5 rounded-2xl animate-pulse" />
+            ))}
+          </div>
+        </div>
+      </section>
+    );
+  }
+
   return (
     <section id="menu" className="py-24 md:py-32 bg-cream text-charcoal">
       <div className="max-w-7xl mx-auto px-6 md:px-12">
@@ -86,7 +89,7 @@ export default function SignatureProducts() {
             >
               <div className="relative aspect-[4/5] overflow-hidden rounded-2xl mb-6 bg-beige">
                 <img
-                  src={product.image}
+                  src={getImageUrl(product.image_url)}
                   alt={product.name}
                   className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                   referrerPolicy="no-referrer"
@@ -95,18 +98,13 @@ export default function SignatureProducts() {
                   }}
                 />
                 <div className="absolute inset-0 bg-charcoal/10 group-hover:bg-transparent transition-colors duration-500" />
-                {product.tag && (
-                  <div className="absolute top-4 left-4 px-3 py-1 bg-cream/90 backdrop-blur-sm text-charcoal text-xs font-semibold uppercase tracking-wider rounded-full">
-                    {product.tag}
-                  </div>
-                )}
               </div>
               <div className="flex justify-between items-start gap-4">
                 <h3 className="font-serif text-xl font-medium leading-tight group-hover:text-mocha transition-colors">
                   {product.name}
                 </h3>
                 <span className="font-mono text-sm font-medium text-charcoal/60 whitespace-nowrap">
-                  {product.price}
+                  ৳ {product.price || 0}
                 </span>
               </div>
             </motion.div>
