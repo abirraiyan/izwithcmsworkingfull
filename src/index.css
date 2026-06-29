@@ -1,6 +1,24 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap');
 @import "tailwindcss";
 
+@font-face {
+  font-family: 'Ananda';
+  src: url('./assets/fonts/Ananda-Regular.woff2') format('woff2'),
+       url('./assets/fonts/Ananda-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Ananda';
+  src: url('./assets/fonts/Ananda-Bold.woff2') format('woff2'),
+       url('./assets/fonts/Ananda-Bold.ttf') format('truetype');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
 @theme {
   --color-cream: #f5ebdd;
   --color-mocha: #6f4e37;
@@ -38,6 +56,14 @@
   }
   .logo-charcoal {
     filter: invert(17%);
+  }
+  .hero-brand-title {
+    font-family: 'Ananda', 'Cormorant Garamond', 'Playfair Display', serif;
+  }
+  .brand-script {
+    font-family: 'Ananda', 'Cormorant Garamond', serif;
+    font-weight: normal;
+    font-style: normal;
   }
 }
 

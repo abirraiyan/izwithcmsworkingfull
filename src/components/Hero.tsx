@@ -48,12 +48,20 @@ export default function Hero({ content }: HeroProps) {
 
   const defaultVideoUrl = "https://www.youtube.com/embed/Dg9tw8p_fn0?autoplay=1&mute=1&loop=1&playlist=Dg9tw8p_fn0&controls=0&showinfo=0&rel=0&playsinline=1&disablekb=1";
 
+  let title1 = (isCustomEnabled && content?.hero_title_line_1) ? content.hero_title_line_1 : "Your Cozy Pastry";
+  let title2 = (isCustomEnabled && content?.hero_title_line_2) ? content.hero_title_line_2 : "& Coffee Escape";
+
+  if (title1 === "Caffeine &" && title2 === "Kindness") {
+    title1 = "Caffeine";
+    title2 = "and Kindness";
+  }
+
   const hero = {
     videoUrl: isCustomEnabled ? (content?.hero_video_url || defaultVideoUrl) : defaultVideoUrl,
     posterUrl: isCustomEnabled ? (content?.hero_poster_url || '') : '',
     badgeText: (isCustomEnabled && content?.hero_badge) ? content.hero_badge : "IZ PATISSERIE & CAFE, Dhaka",
-    title1: (isCustomEnabled && content?.hero_title_line_1) ? content.hero_title_line_1 : "Your Cozy Pastry",
-    title2: (isCustomEnabled && content?.hero_title_line_2) ? content.hero_title_line_2 : "& Coffee Escape",
+    title1,
+    title2,
     ctaText: (isCustomEnabled && content?.hero_cta_text) ? content.hero_cta_text : "View Menu",
     ctaLink: (isCustomEnabled && content?.hero_cta_link) ? content.hero_cta_link : "/menu"
   };
@@ -139,7 +147,7 @@ export default function Hero({ content }: HeroProps) {
               className="mb-6 inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-gold/30 bg-gold/10 backdrop-blur-md text-gold text-[10px] md:text-xs font-semibold tracking-widest uppercase hover:bg-gold hover:text-black transition-all duration-300 hover:scale-105"
             >
               <span className="w-1.5 h-1.5 bg-green-500 rounded-full animate-pulse"></span>
-              Now Available on IZ Grab
+              Now Available on <span className="brand-script normal-case tracking-normal">IZ Grab</span>
             </motion.a>
           )}
 
@@ -152,7 +160,7 @@ export default function Hero({ content }: HeroProps) {
 
           <motion.h1
             variants={itemVariants}
-            className="font-serif text-5xl md:text-7xl lg:text-8xl text-cream leading-[1.1] mb-8 text-balance"
+            className="hero-brand-title text-5xl md:text-7xl lg:text-8xl text-cream leading-[1.1] mb-8 text-balance"
           >
             {hero.title1 || "Your Cozy Pastry"} <br className="hidden md:block" />
             <span className="italic font-light">{hero.title2 || "& Coffee Escape"}</span>

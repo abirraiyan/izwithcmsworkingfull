@@ -174,7 +174,7 @@ export default function Menu() {
               className="mt-8 inline-flex flex-col sm:flex-row items-center gap-4 px-6 py-3 rounded-full border border-gold/30 bg-gold/5 backdrop-blur-sm shadow-soft"
             >
               <span className="text-xs tracking-widest uppercase font-semibold text-mocha">
-                ✨ Order Online via IZ Grab
+                ✨ Order Online via <span className="brand-script normal-case tracking-normal text-sm">IZ Grab</span>
               </span>
               <a 
                 href={izGrabUrl} 

@@ -8,7 +8,7 @@ export const defaultNavigation: NavigationItem[] = [
   { id: 'locations', name: 'Visit Us', href: '/locations', enabled: true, highlighted: false, order: 3 },
   { id: 'menu', name: 'Menu', href: '/menu', enabled: true, highlighted: false, order: 4 },
   { id: 'iz-grab', name: 'IZ Grab', href: 'https://grab.izcafe.com', enabled: true, highlighted: true, order: 5 },
-  { id: 'contact', name: 'Contact', href: '/#reservation', enabled: true, highlighted: false, order: 6 },
+  { id: 'contact', name: 'Contact', href: '/contact', enabled: true, highlighted: false, order: 6 },
 ];
 
 export const getNavigationSettings = async (): Promise<NavigationItem[]> => {

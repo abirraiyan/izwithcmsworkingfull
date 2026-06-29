@@ -1,8 +1,9 @@
 import { motion, useScroll, useTransform } from "motion/react";
-import { Heart, Coffee, Star, Users, Sparkles, ChefHat, Loader2 } from "lucide-react";
-import { useGetToKnowUs } from "../hooks/useGetToKnowUs";
-import { useState, useEffect, ReactNode, Component, ErrorInfo, useRef } from "react";
+import { useRef, useState, useEffect, ReactNode, Component, ErrorInfo } from "react";
+import { Link } from "react-router-dom";
+import { Heart, Coffee, Compass, Sparkles, ArrowRight, Utensils, ChevronDown } from "lucide-react";
 
+// Error Boundary for page robustness
 class ErrorBoundary extends Component<{children: ReactNode}, {hasError: boolean}> {
   public state = { hasError: false };
   public props: { children: ReactNode };
@@ -30,209 +31,412 @@ class ErrorBoundary extends Component<{children: ReactNode}, {hasError: boolean}
   }
 }
 
-function IconRenderer({ name, className }: { name: string; className?: string }) {
-  switch (name) {
-    case 'heart': return <Heart className={className} />;
-    case 'star': return <Star className={className} />;
-    case 'coffee': return <Coffee className={className} />;
-    case 'users': return <Users className={className} />;
-    case 'sparkles': return <Sparkles className={className} />;
-    case 'chef': return <ChefHat className={className} />;
-    default: return <Heart className={className} />;
-  }
-}
-
-function MediaAssetRenderer({ asset, fallbackSrc, className, alt }: { asset: any; fallbackSrc: string; className: string; alt: string }) {
-  if (asset?.type === 'video') {
-    return (
-      <video
-        src={asset.url}
-        autoPlay
-        muted
-        loop
-        playsInline
-        className={className}
-      />
-    );
-  }
-  return (
-    <img
-      src={asset?.url || fallbackSrc}
-      alt={alt}
-      className={className}
-      referrerPolicy="no-referrer"
-    />
-  );
-}
-
 function GetToKnowUsContent() {
-  const { content, loading } = useGetToKnowUs();
-  const [mounted, setMounted] = useState(false);
+  const heroRef = useRef<HTMLDivElement>(null);
+  const quoteRef = useRef<HTMLDivElement>(null);
   const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
-    setMounted(true);
     const checkMobile = () => setIsMobile(window.innerWidth < 768);
     checkMobile();
     window.addEventListener("resize", checkMobile);
     return () => window.removeEventListener("resize", checkMobile);
   }, []);
 
-  if (loading) {
-    return (
-      <div className="min-h-screen bg-cream flex items-center justify-center">
-        <Loader2 className="w-8 h-8 animate-spin text-[#d4af37]" />
-      </div>
-    );
-  }
+  // Update SEO metadata
+  useEffect(() => {
+    document.title = "Get to Know Us | IZ Pâtisserie & Café";
+    
+    let metaDescription = document.querySelector('meta[name="description"]');
+    const descriptionContent = "Get to know the philosophy, people, and values of IZ Pâtisserie & Café. Discover our journey, crafted products, and the luxury brand experience behind our friendly neighborhood cafes in Dhaka.";
+    
+    if (metaDescription) {
+      metaDescription.setAttribute("content", descriptionContent);
+    } else {
+      metaDescription = document.createElement("meta");
+      metaDescription.setAttribute("name", "description");
+      metaDescription.setAttribute("content", descriptionContent);
+      document.head.appendChild(metaDescription);
+    }
+  }, []);
 
-  if (!mounted || !content) {
-    return null;
-  }
+  // Scroll animations setup
+  const { scrollYProgress: heroScroll } = useScroll({
+    target: heroRef,
+    offset: ["start start", "end start"]
+  });
 
-  const { settings, founders, philosophy } = content;
+  const heroBgY = useTransform(heroScroll, [0, 1], ["0%", "30%"]);
+  const heroTextY = useTransform(heroScroll, [0, 1], ["0%", "40%"]);
+  const heroOpacity = useTransform(heroScroll, [0, 1], [1, 0.2]);
 
-  const anim = (props: any) => (!mounted || isMobile || !settings?.enableAnimation) ? {} : props;
+  // Framer Motion helper for conditional responsive animations
+  const anim = (props: any) => isMobile ? {} : props;
+
+  // Values card data
+  const values = [
+    {
+      title: "Refined Craftsmanship",
+      description: "We believe in pure ingredients, hand-rolled processes, and the pursuit of culinary perfection. Every single pastry and espresso represents a dedication to timeless artisan craft.",
+      icon: Utensils,
+    },
+    {
+      title: "Everyday Kindness",
+      description: "True hospitality is quiet, thoughtful, and personal. We focus on genuine connections and everyday care that makes your routine feel special.",
+      icon: Heart,
+    },
+    {
+      title: "Conscious Spaces",
+      description: "We design calming, beautiful sanctuaries that let you slow down, breathe, and gather. Our cafes are architectural expressions of simple luxury.",
+      icon: Compass,
+    }
+  ];
+
+  // People Behind IZ data (Storytelling format)
+  const teamStories = [
+    {
+      label: "Crafted Daily",
+      role: "The Pâtissiers",
+      title: "Mastering the Fold",
+      story: "Before the first light touches Dhaka, our pastry kitchen is already filled with the aroma of warming ovens. Here, pastry-making is treated as a precise, meditative science. Guided by traditional French methods, our pâtissiers dedicate their mornings to the details: folding premium cultured butter into cold dough, monitoring fermentation timings to the minute, and hand-shaping each layers-thin pastry. The result is a selection of croissants and pastries that shatter delicately at the first bite, revealing a perfect honeycomb structure inside.",
+      image: "https://images.unsplash.com/photo-1509440159596-0249088772ff?q=80&w=1200&auto=format&fit=crop",
+      quote: "Quality isn't accidental. It's the daily repetition of doing small things perfectly."
+    },
+    {
+      label: "Brewed with Precision",
+      role: "The Baristas",
+      title: "Extracting Character",
+      story: "For our baristas, a cup of coffee is a canvas of sensory experience. Behind the bar, they operate as both scientists and sensory artists. Every morning, they calibrate the espresso machines, adjusting grind sizes, water temperatures, and pressure profiles to highlight the unique regional tasting notes of our single-origin beans. From weighing dose to measuring extraction yield with clinical precision, they ensure that every pour-over and flat white reveals the natural floral, fruity, or chocolatey notes of the coffee's origin.",
+      image: "https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?q=80&w=1200&auto=format&fit=crop",
+      quote: "We don't just serve coffee; we highlight the hard work of the growers who harvested it."
+    },
+    {
+      label: "Hospitality First",
+      role: "The Curators",
+      title: "Sustaining the Welcome",
+      story: "At the heart of the IZ experience is our curation team—the faces who set the peaceful, welcoming tone of our sanctuaries. Understanding that a great café is defined by its human warmth, our curators focus on the quiet details of hospitality. They greet our regulars by name, arrange our visual spaces to foster calmness, and manage the daily flow so that each guest can find a moment of peace. They are the guardians of our signature promise: combining Caffeine & Kindness in every interaction.",
+      image: "https://images.unsplash.com/photo-1560066984-138dadb4c035?q=80&w=1200&auto=format&fit=crop",
+      quote: "True luxury is feeling entirely at home, even in the middle of a busy city."
+    }
+  ];
 
   return (
-    <motion.main
-      {...anim({
-        initial: { opacity: 0 },
-        animate: { opacity: 1 },
-        exit: { opacity: 0 },
-        transition: { duration: 0.5 }
-      })}
-      className="text-charcoal min-h-screen pt-32 pb-24 md:pt-40 md:pb-32 overflow-hidden"
-      style={{ backgroundColor: settings?.background || '#FAF8F5' }}
-    >
-      <section className="max-w-7xl mx-auto px-6 md:px-12">
-        
-        {/* Header / Philosophy Section */}
-        {philosophy?.enabled !== false && (
-          <>
-            <motion.div
-              {...anim({
-                initial: { opacity: 0, y: 30 },
-                animate: { opacity: 1, y: 0 },
-                transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] }
-              })}
-              className="text-center mb-24"
-            >
-              <span className="text-gold uppercase tracking-[0.3em] text-xs font-semibold mb-6 block">
-                {philosophy?.badge || "Philosophy"}
-              </span>
-              <h1 className="font-serif text-5xl md:text-6xl lg:text-7xl text-charcoal mb-6">
-                {philosophy?.titleNormal || "Get to Know"} <span className="italic font-light text-mocha">{philosophy?.titleAccent || "Us"}</span>
-              </h1>
-              <p className="text-charcoal/70 text-lg md:text-xl font-light max-w-2xl mx-auto">
-                {philosophy?.subtitle || "We are more than a bakery; we are a community of passionate individuals dedicated to creating memorable experiences."}
-              </p>
-            </motion.div>
+    <div className="bg-[#FAF8F5] text-charcoal min-h-screen relative overflow-hidden font-sans">
+      {/* 1. Cinematic Hero Section */}
+      <section ref={heroRef} className="relative h-[80vh] w-full flex items-center justify-center overflow-hidden bg-charcoal">
+        <motion.div 
+          style={{ y: heroBgY, opacity: heroOpacity }}
+          className="absolute inset-0 z-0 scale-[1.05]"
+        >
+          <img
+            src="https://images.unsplash.com/photo-1541167760496-1628856ab772?q=80&w=2000&auto=format&fit=crop"
+            alt="Cinematic luxury cafe scene"
+            className="w-full h-full object-cover"
+          />
+          <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/40 to-black/80" />
+        </motion.div>
 
-            {/* Values Section */}
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-32">
-              {(philosophy?.cards || []).sort((a,b)=>a.order - b.order).map((value: any, idx: number) => (
-                <motion.div
-                  key={value.id || idx}
-                  {...anim({
-                    initial: { opacity: 0, y: 30 },
-                    whileInView: { opacity: 1, y: 0 },
-                    viewport: { once: true },
-                    transition: { delay: idx * 0.1, duration: 0.8 }
-                  })}
-                  className={`bg-white p-8 rounded-2xl shadow-sm transition-all duration-300 flex flex-col items-center text-center ${value.hoverEffect === 'lift' ? 'hover:-translate-y-2 hover:shadow-lg' : value.hoverEffect === 'scale' ? 'hover:scale-105 hover:shadow-lg' : value.hoverEffect === 'glow' ? 'hover:shadow-[0_0_20px_rgba(212,175,55,0.3)]' : 'hover:shadow-md'}`}
-                >
-                  <div className="w-16 h-16 bg-beige rounded-full flex items-center justify-center mb-6" style={{ color: value.accentColor || '#C8A86B' }}>
-                    <IconRenderer name={value.icon} className="w-8 h-8" />
-                  </div>
-                  <h3 className="font-serif text-xl font-medium mb-4">{value.title}</h3>
-                  <p className="text-charcoal/60 font-light text-sm leading-relaxed">
-                    {value.description}
-                  </p>
-                </motion.div>
-              ))}
-            </div>
-          </>
-        )}
+        <div className="relative z-10 text-center px-6 max-w-4xl mx-auto flex flex-col items-center">
+          <motion.div
+            style={{ y: heroTextY }}
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
+            className="flex flex-col items-center"
+          >
+            <span className="text-gold uppercase tracking-[0.3em] text-xs md:text-sm font-semibold mb-6 block">
+              Behind the Crafted Spaces
+            </span>
+            <h1 className="font-serif text-5xl md:text-7xl lg:text-8xl text-cream leading-tight mb-8">
+              Get to <span className="italic font-light text-beige">Know Us</span>
+            </h1>
+            <p className="text-cream/80 text-sm md:text-base font-light tracking-wide max-w-lg leading-relaxed">
+              We are more than a coffee shop; we are curators of daily sanctuary.
+            </p>
+          </motion.div>
+        </div>
 
-        {/* Team Section */}
-        {founders?.enabled !== false && (
-          <div className="bg-charcoal text-cream rounded-[2rem] p-12 md:p-24 relative overflow-hidden">
-            <div className="absolute top-0 right-0 w-full md:w-1/2 h-full pointer-events-none" style={{ opacity: (founders?.backgroundOverlayOpacity ?? 10) / 100 }}>
-               <MediaAssetRenderer
-                asset={founders?.backgroundMedia}
-                fallbackSrc="https://images.unsplash.com/photo-1554118811-1e0d58224f24?q=80&w=1000&auto=format&fit=crop"
-                alt="Background pattern"
-                className="w-full h-full object-cover"
-              />
-            </div>
-            
-            <div className="relative z-10 grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-              <motion.div
-                {...anim({
-                  initial: { opacity: 0, x: -30 },
-                  whileInView: { opacity: 1, x: 0 },
-                  viewport: { once: true },
-                  transition: { duration: 0.8 }
-                })}
-              >
-                <h2 className="font-serif text-4xl md:text-5xl mb-8">
-                  {founders?.heading ? (
-                    <>
-                      {founders.heading.split(' ').slice(0, -1).join(' ')} <span className="italic text-beige">{founders.heading.split(' ').slice(-1)}</span>
-                    </>
-                  ) : (
-                    <>Meet the <span className="italic text-beige">Founders</span></>
-                  )}
-                </h2>
-                <div className="space-y-6 text-cream/80 font-light text-lg leading-relaxed">
-                  {founders?.paragraph1 && <p>{founders.paragraph1}</p>}
-                  {founders?.paragraph2 && <p>{founders.paragraph2}</p>}
-                  
-                  {(!founders?.paragraph1 && !founders?.paragraph2) && (
-                    <>
-                      <p>IZ Patisserie was founded by a team of culinary enthusiasts who shared a vision of bringing world-class pastries to our local community.</p>
-                      <p>With backgrounds spanning from traditional French culinary schools to modern specialty coffee roasteries, our founders combined their expertise to create a unique destination.</p>
-                    </>
-                  )}
-                  
-                  <p className="italic text-beige border-l-2 border-beige pl-4 mt-6">
-                    "{founders?.quote || "We wanted to build a place where people could slow down, savor the moment, and enjoy the simple luxury of a perfectly crafted croissant and a beautiful cup of coffee."}"
-                  </p>
-                </div>
-              </motion.div>
-              
-              <motion.div
-                {...anim({
-                  initial: { opacity: 0, scale: 0.95 },
-                  whileInView: { opacity: 1, scale: 1 },
-                  viewport: { once: true },
-                  transition: { duration: 0.8 }
-                })}
-                className="grid grid-cols-2 gap-6"
-              >
-                <div className={`aspect-[3/4] overflow-hidden mt-12 ${founders?.imageLeftShape === 'circle' ? 'rounded-full' : founders?.imageLeftShape === 'organic' ? 'rounded-[30%_70%_70%_30%/30%_30%_70%_70%]' : 'rounded-2xl'}`}>
-                  <MediaAssetRenderer
-                    asset={founders?.imageLeft}
-                    fallbackSrc="https://images.unsplash.com/photo-1583338917451-face2751d8d5?q=80&w=600&auto=format&fit=crop"
-                    alt="Founder Left"
-                    className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-500"
-                  />
-                </div>
-                <div className={`aspect-[3/4] overflow-hidden ${founders?.imageRightShape === 'circle' ? 'rounded-full' : founders?.imageRightShape === 'organic' ? 'rounded-[70%_30%_30%_70%/70%_70%_30%_30%]' : 'rounded-2xl'}`}>
-                  <MediaAssetRenderer
-                    asset={founders?.imageRight}
-                    fallbackSrc="https://images.unsplash.com/photo-1577219491135-ce391730fb2c?q=80&w=600&auto=format&fit=crop"
-                    alt="Founder Right"
-                    className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-500"
-                  />
-                </div>
-              </motion.div>
-            </div>
-          </div>
-        )}
+        {/* Scroll Indicator */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 1, duration: 1 }}
+          className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center cursor-pointer pointer-events-none"
+        >
+          <span className="text-cream/50 text-[10px] uppercase tracking-[0.25em] mb-2 font-medium">
+            Explore
+          </span>
+          <motion.div
+            animate={{ y: [0, 8, 0] }}
+            transition={{ repeat: Infinity, duration: 1.5, ease: "easeInOut" }}
+          >
+            <ChevronDown className="w-5 h-5 text-gold" />
+          </motion.div>
+        </motion.div>
       </section>
-    </motion.main>
+
+      {/* 2. Our Philosophy Section */}
+      <section className="py-24 md:py-32 max-w-7xl mx-auto px-6 md:px-12 relative z-10">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+          <motion.div
+            {...anim({
+              initial: { opacity: 0, x: -30 },
+              whileInView: { opacity: 1, x: 0 },
+              viewport: { once: true, margin: "-100px" },
+              transition: { duration: 0.8 }
+            })}
+            className="space-y-6"
+          >
+            <span className="text-gold uppercase tracking-[0.3em] text-xs font-semibold block">
+              Our Philosophy
+            </span>
+            <h2 className="font-serif text-4xl md:text-5xl lg:text-6xl text-charcoal leading-[1.1] tracking-tight">
+              Savoring the <br />
+              <span className="italic text-mocha font-light">Unrushed Moments</span>
+            </h2>
+            <div className="w-20 h-[2px] bg-gold my-6" />
+            <p className="text-charcoal/80 font-light text-base md:text-lg leading-relaxed">
+              We believe coffee and pastries are more than commodities; they are pauses in a busy world. Each cup of coffee is dialed in to highlight its distinct terroir, and every pastry is shaped by hand using traditional, slow fermentation.
+            </p>
+            <p className="text-charcoal/70 font-light text-sm md:text-base leading-relaxed">
+              Our mission is to cultivate welcoming spaces that encourage visual harmony, quiet focus, and honest hospitality. We bring refined global craftsmanship into Dhaka's daily rhythm.
+            </p>
+          </motion.div>
+
+          <motion.div
+            {...anim({
+              initial: { opacity: 0, scale: 0.96, y: 20 },
+              whileInView: { opacity: 1, scale: 1, y: 0 },
+              viewport: { once: true, margin: "-100px" },
+              transition: { duration: 0.8 }
+            })}
+            className="relative aspect-[4/5] rounded-[2rem] overflow-hidden shadow-xl border border-charcoal/5 group"
+          >
+            <img
+              src="https://images.unsplash.com/photo-1507133750040-4a8f57021571?q=80&w=1200&auto=format&fit=crop"
+              alt="Artisanal Warm Coffee Setup"
+              className="w-full h-full object-cover transition-transform duration-[1200ms] group-hover:scale-103"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-charcoal/20 to-transparent pointer-events-none" />
+          </motion.div>
+        </div>
+      </section>
+
+      {/* 3. The People Behind IZ Section (Redesigned Magazine Layout) */}
+      <section className="py-32 md:py-48 bg-[#FAF8F5] border-t border-cream">
+        <div className="max-w-7xl mx-auto px-6 md:px-12">
+          {/* Header */}
+          <motion.div
+            {...anim({
+              initial: { opacity: 0, y: 30 },
+              whileInView: { opacity: 1, y: 0 },
+              viewport: { once: true, margin: "-100px" },
+              transition: { duration: 1, ease: [0.16, 1, 0.3, 1] }
+            })}
+            className="text-center max-w-3xl mx-auto mb-28"
+          >
+            <span className="text-gold uppercase tracking-[0.35em] text-xs font-semibold mb-6 block">
+              Craft & Community
+            </span>
+            <h2 className="font-serif text-4xl md:text-6xl text-charcoal leading-tight">
+              The People <span className="italic text-mocha font-light">Behind IZ</span>
+            </h2>
+            <div className="w-16 h-[1px] bg-gold/40 mx-auto mt-8 mb-6" />
+            <p className="text-charcoal/60 font-light text-base md:text-lg max-w-xl mx-auto leading-relaxed">
+              Meet the specialists whose dedicated daily habits and values shape the rhythm of our sanctuaries.
+            </p>
+          </motion.div>
+
+          {/* Stories Stack */}
+          <div className="space-y-40 md:space-y-56">
+            {teamStories.map((story, idx) => {
+              const isEven = idx % 2 === 0;
+              return (
+                <div 
+                  key={idx}
+                  className={`flex flex-col lg:flex-row items-center gap-16 lg:gap-24 ${
+                    isEven ? "" : "lg:flex-row-reverse"
+                  }`}
+                >
+                  {/* Image Side */}
+                  <motion.div
+                    {...anim({
+                      initial: { opacity: 0, x: isEven ? -40 : 40, y: 20 },
+                      whileInView: { opacity: 1, x: 0, y: 0 },
+                      viewport: { once: true, margin: "-100px" },
+                      transition: { duration: 1.2, ease: [0.16, 1, 0.3, 1] }
+                    })}
+                    className="w-full lg:w-[50%] relative"
+                  >
+                    {/* Warm color grading via sepia & tone filter */}
+                    <div className="aspect-[4/5] sm:aspect-[16/10] lg:aspect-[4/5] rounded-[2.5rem] overflow-hidden shadow-2xl border border-charcoal/5 relative bg-mocha/10 group">
+                      <img
+                        src={story.image}
+                        alt={story.role}
+                        className="w-full h-full object-cover transition-transform duration-[2000ms] ease-out group-hover:scale-105 filter sepia-[15%] contrast-[1.02] brightness-[0.98]"
+                        loading="lazy"
+                      />
+                      {/* Subtle elegant gradient overlay */}
+                      <div className="absolute inset-0 bg-gradient-to-t from-charcoal/10 via-transparent to-transparent pointer-events-none" />
+                    </div>
+                    {/* Editorial background shadow decoration */}
+                    <div 
+                      className="absolute -inset-4 rounded-[3rem] bg-[#FAF8F5]/10 border border-gold/10 -z-10 pointer-events-none scale-[0.98]" 
+                    />
+                  </motion.div>
+
+                  {/* Text Side */}
+                  <motion.div
+                    {...anim({
+                      initial: { opacity: 0, x: isEven ? 40 : -40, y: 20 },
+                      whileInView: { opacity: 1, x: 0, y: 0 },
+                      viewport: { once: true, margin: "-100px" },
+                      transition: { duration: 1.2, ease: [0.16, 1, 0.3, 1], delay: 0.1 }
+                    })}
+                    className="w-full lg:w-[50%] space-y-8 flex flex-col justify-center"
+                  >
+                    <div className="space-y-3">
+                      <div className="flex items-center gap-3">
+                        <span className="text-gold uppercase tracking-[0.3em] text-xs font-bold">
+                          {story.label}
+                        </span>
+                        <div className="h-[1px] w-8 bg-gold/30" />
+                        <span className="text-charcoal/50 text-xs font-light uppercase tracking-wider">
+                          {story.role}
+                        </span>
+                      </div>
+                      <h3 className="font-serif text-3xl md:text-4xl lg:text-5xl text-charcoal font-normal tracking-tight leading-tight">
+                        {story.title}
+                      </h3>
+                    </div>
+
+                    <p className="text-charcoal/80 font-light text-base md:text-lg leading-relaxed">
+                      {story.story}
+                    </p>
+
+                    {/* Pull Quote */}
+                    <div className="border-l-2 border-gold/40 pl-6 py-1 italic font-serif text-charcoal/60 text-lg md:text-xl">
+                      "{story.quote}"
+                    </div>
+                  </motion.div>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      </section>
+
+      {/* 4. Our Values Section (Three Premium Cards) */}
+      <section className="py-24 md:py-32 max-w-7xl mx-auto px-6 md:px-12">
+        <motion.div
+          {...anim({
+            initial: { opacity: 0, y: 20 },
+            whileInView: { opacity: 1, y: 0 },
+            viewport: { once: true },
+            transition: { duration: 0.8 }
+          })}
+          className="text-center max-w-2xl mx-auto mb-20"
+        >
+          <span className="text-gold uppercase tracking-[0.3em] text-xs font-semibold mb-4 block">
+            Core Values
+          </span>
+          <h2 className="font-serif text-4xl md:text-5xl text-charcoal">
+            What We <span className="italic text-mocha font-light">Live By</span>
+          </h2>
+        </motion.div>
+
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12">
+          {values.map((val, idx) => {
+            const IconComponent = val.icon;
+            return (
+              <motion.div
+                key={idx}
+                {...anim({
+                  initial: { opacity: 0, y: 30 },
+                  whileInView: { opacity: 1, y: 0 },
+                  viewport: { once: true },
+                  transition: { delay: idx * 0.15, duration: 0.8 }
+                })}
+                className="bg-white border border-[#c6a75e]/15 hover:border-[#c6a75e]/40 rounded-[2rem] p-8 md:p-10 shadow-soft hover:shadow-lg hover:-translate-y-2 transition-all duration-500 flex flex-col items-center text-center group h-full"
+              >
+                <div className="w-16 h-16 bg-[#FAF8F5] border border-[#c6a75e]/25 text-[#c6a75e] group-hover:bg-[#c6a75e] group-hover:text-cream rounded-full flex items-center justify-center mb-6 transition-all duration-300">
+                  <IconComponent className="w-7 h-7" />
+                </div>
+                <h3 className="font-serif text-2xl font-medium mb-4 text-charcoal">
+                  {val.title}
+                </h3>
+                <p className="text-charcoal/70 font-light text-sm leading-relaxed flex-grow">
+                  {val.description}
+                </p>
+              </motion.div>
+            );
+          })}
+        </div>
+      </section>
+
+      {/* 7. Signature Brand Quote Section */}
+      <section ref={quoteRef} className="py-24 bg-charcoal text-cream relative overflow-hidden">
+        <div className="absolute inset-0 bg-noise opacity-5 pointer-events-none" />
+        <div 
+          className="absolute inset-0 pointer-events-none z-0"
+          style={{
+            background: "radial-gradient(circle at 50% 50%, rgba(200,168,107,0.12), transparent 60%)"
+          }}
+        />
+        <div className="relative z-10 max-w-4xl mx-auto px-6 text-center">
+          <motion.div
+            {...anim({
+              initial: { opacity: 0, y: 20 },
+              whileInView: { opacity: 1, y: 0 },
+              viewport: { once: true },
+              transition: { duration: 0.8 }
+            })}
+            className="flex flex-col items-center gap-6"
+          >
+            <Sparkles className="w-6 h-6 text-gold animate-pulse" />
+            <blockquote className="font-serif text-2xl md:text-4xl text-cream leading-relaxed italic max-w-3xl">
+              "A café is not just a place to buy coffee; it is a cultural sanctuary where time slows down and connection begins."
+            </blockquote>
+            <div className="h-[1px] w-24 bg-gold/50 my-2" />
+            <span className="text-gold uppercase tracking-[0.25em] text-xs font-semibold">
+              The Shared Table at IZ
+            </span>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* 8. Visit Us Call to Action */}
+      <section className="relative py-32 overflow-hidden bg-cream/40 border-t border-cream">
+        <div className="absolute inset-0 pointer-events-none">
+          <img
+            src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?q=80&w=2000&auto=format&fit=crop"
+            alt="Warm premium Cafe space"
+            className="w-full h-full object-cover opacity-10 blur-[1px]"
+          />
+        </div>
+        <div className="relative z-10 max-w-4xl mx-auto px-6 text-center space-y-8 flex flex-col items-center">
+          <span className="text-gold uppercase tracking-[0.3em] text-xs font-bold block">
+            Visit Our Spaces
+          </span>
+          <h2 className="font-serif text-4xl md:text-5xl lg:text-6xl text-charcoal max-w-2xl leading-tight">
+            Step Into the <br />
+            <span className="italic text-mocha font-light">IZ Sanctuary</span>
+          </h2>
+          <p className="text-charcoal/70 text-base md:text-lg font-light max-w-lg leading-relaxed">
+            Find your nearest neighborhood cafe in Dhaka. Explore our distinct spatial aesthetics, crafted menus, and warm hospitality.
+          </p>
+          <div className="pt-4 w-full flex justify-center">
+            <Link
+              to="/locations"
+              className="inline-flex items-center justify-center gap-3 px-8 py-4 bg-gold hover:bg-[#6f4e37] text-white font-semibold tracking-widest uppercase rounded-full shadow-md hover:scale-105 active:scale-95 transition-all duration-300 w-full sm:w-auto text-sm"
+            >
+              <span>Explore Locations</span>
+              <ArrowRight size={16} />
+            </Link>
+          </div>
+        </div>
+      </section>
+    </div>
   );
 }
 

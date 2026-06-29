@@ -24,7 +24,7 @@ export default function BrandStory({ content }: BrandStoryProps) {
           >
             <div className="aspect-[3/4] rounded-2xl overflow-hidden bg-mocha/20">
               <img
-                src="https://images.unsplash.com/photo-1600093463592-8e36ae95ef56?q=80&w=1200&auto=format&fit=crop"
+                src="/images/brand-story-1.jpg"
                 alt="Interior of IZ Patisserie"
                 className="w-full h-full object-cover"
                 referrerPolicy="no-referrer"
@@ -38,8 +38,8 @@ export default function BrandStory({ content }: BrandStoryProps) {
               className="absolute -bottom-10 -right-10 w-2/3 aspect-square rounded-2xl overflow-hidden border-8 border-beige hidden md:block"
             >
               <img
-                src="https://images.unsplash.com/photo-1511920170033-f8396924c348?q=80&w=800&auto=format&fit=crop"
-                alt="Latte art close up"
+                src="/images/brand-story-2.jpg"
+                alt="Cozy counter seating and window view of IZ"
                 className="w-full h-full object-cover"
                 referrerPolicy="no-referrer"
               />

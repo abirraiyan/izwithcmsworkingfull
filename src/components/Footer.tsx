@@ -42,6 +42,9 @@ export default function Footer() {
                 &copy; {new Date().getFullYear()} IZ Patisserie & Cafe. All rights
                 reserved.
               </p>
+              <p className="text-cream/50 text-xs font-light uppercase tracking-widest">
+                Email:
+              </p>
               <p className="text-cream/30 text-[10px] font-medium uppercase tracking-[0.2em]">
                 Built by <a href="https://xceptionist.com/" target="_blank" rel="noopener noreferrer" className="text-gold hover:text-white transition-colors duration-300">Xceptionist</a>
               </p>
@@ -72,7 +75,7 @@ export default function Footer() {
               rel="noopener noreferrer"
               className="text-[#c6a75e] hover:text-white transition-all duration-300 text-[11px] tracking-[0.3em] uppercase font-bold border-b border-[#c6a75e]/30 pb-0.5 hover:border-white"
             >
-              IZ Grab Delivery
+              <span className="brand-script normal-case tracking-normal">IZ Grab</span> Delivery
             </a>
           </div>
         </div>

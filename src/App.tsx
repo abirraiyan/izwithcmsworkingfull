@@ -8,6 +8,7 @@ import OurStory from "./pages/OurStory";
 import GetToKnowUs from "./pages/GetToKnowUs";
 import Locations from "./pages/Locations";
 import LocationDetails from "./pages/LocationDetails";
+import Contact from "./pages/Contact";
 import AdminLogin from "./pages/admin/Login";
 import AdminDashboard from "./pages/admin/Dashboard";
 import MenuManager from "./pages/admin/MenuManager";
@@ -21,7 +22,6 @@ import AdminGetToKnowUs from "./pages/admin/get-to-know-us";
 import NavigationManager from "./pages/admin/NavigationManager";
 import ProtectedRoute from "./components/ProtectedRoute";
 import { Toaster } from "react-hot-toast";
-import FloatingReserveButton from "./components/FloatingReserveButton";
 import { useEffect } from "react";
 
 function ScrollToTop() {
@@ -55,6 +55,7 @@ function AnimatedRoutes() {
           <Route path="/get-to-know-us" element={<GetToKnowUs />} />
           <Route path="/locations" element={<Locations />} />
           <Route path="/locations/:slug" element={<LocationDetails />} />
+          <Route path="/contact" element={<Contact />} />
           
           
           {/* Admin Routes */}
@@ -105,7 +106,6 @@ export default function App() {
       <div className="relative bg-cream min-h-screen font-sans">
         <div className="bg-noise" />
         <AnimatedRoutes />
-        <FloatingReserveButton />
       </div>
     </Router>
   );
