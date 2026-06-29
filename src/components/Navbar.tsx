@@ -172,7 +172,7 @@ export default function Navbar() {
         </div>
 
         {/* Center: Desktop Nav */}
-        <nav className="hidden md:flex items-center justify-center gap-10 lg:gap-12">
+        <nav className="hidden lg:flex items-center justify-center gap-10 lg:gap-12">
           {centerLinks.map((link) =>
             renderLink(
               link,
@@ -194,7 +194,7 @@ export default function Navbar() {
             ) : (
               link.name
             );
-            const btnClass = `hidden md:block px-5 py-2.5 text-[11px] tracking-[0.2em] uppercase rounded-full border transition-all duration-300 hover:scale-105 font-bold shadow-sm ${
+            const btnClass = `hidden lg:block px-5 py-2.5 text-[11px] tracking-[0.2em] uppercase rounded-full border transition-all duration-300 hover:scale-105 font-bold shadow-sm ${
               !isTransparent
                 ? 'border-gold text-mocha hover:bg-[#6f4e37] hover:border-[#6f4e37] hover:text-cream'
                 : 'border-gold/50 text-gold hover:bg-gold hover:text-charcoal hover:border-gold'
@@ -216,7 +216,7 @@ export default function Navbar() {
           {/* Mobile Toggle Button */}
           <button
             ref={toggleRef}
-            className={`p-2 md:hidden ${!isTransparent ? 'text-charcoal' : 'text-white'}`}
+            className={`p-2 lg:hidden ${!isTransparent ? 'text-charcoal' : 'text-white'}`}
             onClick={() => setIsMobileMenuOpen(true)}
             aria-label="Open menu"
             aria-expanded={isMobileMenuOpen}

@@ -190,7 +190,7 @@ export default function MediaUploader({
             />
           )}
           
-          <div className="absolute top-4 right-4 flex gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
+          <div className="absolute top-4 right-4 flex gap-2 opacity-100 lg:opacity-0 group-hover:opacity-100 transition-opacity">
             <button
               type="button"
               onClick={() => fileInputRef.current?.click()}

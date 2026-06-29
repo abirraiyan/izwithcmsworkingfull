@@ -123,12 +123,12 @@ export default function LocationForm({ location, onSubmit: onSave, onClose }: Lo
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
-      className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md"
+      className="fixed inset-0 z-50 flex items-center justify-center p-0 sm:p-4 bg-black/80 backdrop-blur-md"
     >
       <motion.div
         initial={{ scale: 0.95, y: 20 }}
         animate={{ scale: 1, y: 0 }}
-        className="bg-[#1a1a1a] border border-[#3a3a3a] rounded-[2.5rem] w-full max-w-4xl max-h-[90vh] overflow-hidden shadow-2xl flex flex-col"
+        className="bg-[#1a1a1a] border border-[#3a3a3a] rounded-none sm:rounded-[2.5rem] w-full h-full sm:h-auto sm:max-w-4xl sm:max-h-[90vh] overflow-hidden shadow-2xl flex flex-col"
       >
         {/* Header */}
         <div className="flex items-center justify-between p-8 border-b border-[#3a3a3a] bg-[#1a1a1a]">
@@ -145,7 +145,7 @@ export default function LocationForm({ location, onSubmit: onSave, onClose }: Lo
           </button>
         </div>
 
-        <form onSubmit={handleSubmit} className="p-8 space-y-8 overflow-y-auto flex-1 custom-scrollbar">
+        <form onSubmit={handleSubmit} className="p-6 sm:p-8 space-y-8 overflow-y-auto flex-1 custom-scrollbar">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
             {/* Left Column: Basic Info */}
             <div className="space-y-6 text-white">

@@ -146,7 +146,6 @@ export default function Hero({ content }: HeroProps) {
               variants={itemVariants}
               className="mb-6 inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-gold/30 bg-gold/10 backdrop-blur-md text-gold text-[10px] md:text-xs font-semibold tracking-widest uppercase hover:bg-gold hover:text-black transition-all duration-300 hover:scale-105"
             >
-              <span className="w-1.5 h-1.5 bg-green-500 rounded-full animate-pulse"></span>
               Now Available on <span className="brand-script normal-case tracking-normal">IZ Grab</span>
             </motion.a>
           )}
@@ -160,7 +159,7 @@ export default function Hero({ content }: HeroProps) {
 
           <motion.h1
             variants={itemVariants}
-            className="hero-brand-title text-5xl md:text-7xl lg:text-8xl text-cream leading-[1.1] mb-8 text-balance"
+            className="hero-brand-title text-4xl sm:text-5xl md:text-7xl lg:text-8xl text-cream leading-[1.1] mb-8 text-balance"
           >
             {hero.title1 || "Your Cozy Pastry"} <br className="hidden md:block" />
             <span className="italic font-light">{hero.title2 || "& Coffee Escape"}</span>

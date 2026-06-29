@@ -1,7 +1,7 @@
 import { motion, useScroll, useTransform } from "motion/react";
 import { useRef, useState, useEffect, ReactNode, Component, ErrorInfo } from "react";
 import { useOurStory } from "../hooks/useOurStory";
-import { Loader2, MapPin, Coffee, Utensils, Award, Sparkles, Heart, Compass } from "lucide-react";
+import { Loader2, Store, Coffee, UtensilsCrossed, ChefHat, Croissant, Award, Sparkles, Heart, Compass, MapPin, Utensils } from "lucide-react";
 
 class ErrorBoundary extends Component<{children: ReactNode}, {hasError: boolean}> {
   public state = { hasError: false };
@@ -109,7 +109,7 @@ function OurStoryContent() {
       id: "01",
       title: "Pallabi, Mirpur",
       description: "What began in Pallabi laid the foundation of IZ Pâtisserie & Café. Built on care, precision, and genuine hospitality, this location established the values that continue to define the brand today.",
-      icon: MapPin,
+      icon: Store,
       image: "https://images.unsplash.com/photo-1554118811-1e0d58224f24?q=80&w=800&auto=format&fit=crop"
     },
     {
@@ -123,21 +123,21 @@ function OurStoryContent() {
       id: "03",
       title: "Dhanmondi 27",
       description: "The opening of Dhanmondi 27 marked another step in the journey, creating a refined yet welcoming environment where community, craftsmanship, and hospitality come together.",
-      icon: Utensils,
+      icon: UtensilsCrossed,
       image: "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?q=80&w=800&auto=format&fit=crop"
     },
     {
       id: "04",
       title: "Central Kitchen",
       description: "Today, all locations are united through a central kitchen that ensures consistency, quality, and operational excellence across every pastry, beverage, and dish.",
-      icon: Award,
+      icon: ChefHat,
       image: "https://images.unsplash.com/photo-1556910103-1c02745aae4d?q=80&w=800&auto=format&fit=crop"
     },
     {
       id: "05",
       title: "Future Growth",
       description: "With new locations on the horizon, IZ continues to expand while remaining rooted in its founding promise: delivering experiences guided by Caffeine & Kindness.",
-      icon: Sparkles,
+      icon: Croissant,
       image: "https://images.unsplash.com/photo-1442512595331-e89e73853f31?q=80&w=800&auto=format&fit=crop"
     }
   ];
@@ -334,7 +334,7 @@ function OurStoryContent() {
 
           <div className="relative max-w-5xl mx-auto">
             {/* Timeline Center Spine */}
-            <div className="absolute top-0 bottom-0 left-4 md:left-1/2 w-[2px] bg-gold/20 -translate-x-1/2" />
+            <div className="absolute top-0 bottom-0 left-4 md:left-1/2 w-[2px] bg-[#C6A75E]/35 -translate-x-1/2" />
 
             <div className="space-y-16 md:space-y-24">
               {milestones.map((milestone, idx) => {
@@ -345,7 +345,7 @@ function OurStoryContent() {
                     className={`relative flex flex-col md:flex-row items-center ${idx % 2 === 1 ? "md:flex-row-reverse" : ""}`}
                   >
                     {/* Card container */}
-                    <div className="w-full md:w-1/2 pl-12 md:pl-0 md:px-12">
+                    <div className={`w-full md:w-1/2 pl-12 md:pl-0 ${idx % 2 === 0 ? "md:pr-[56px]" : "md:pl-[56px]"}`}>
                       <motion.div
                         {...anim({
                           initial: { opacity: 0, x: isMobile ? 30 : (idx % 2 === 1 ? 50 : -50) },
@@ -353,7 +353,7 @@ function OurStoryContent() {
                           viewport: { once: true, margin: "-100px" },
                           transition: { duration: 0.8, ease: "easeOut" }
                         })}
-                        className="bg-white rounded-3xl p-6 md:p-8 shadow-sm border border-charcoal/5 hover:border-gold/30 hover:shadow-md transition-all duration-300 group"
+                        className="bg-white rounded-[24px] p-7 md:p-10 shadow-sm border border-charcoal/5 hover:border-gold/30 hover:shadow-md transition-all duration-300 group"
                       >
                         <div className="relative aspect-[16/10] w-full rounded-2xl overflow-hidden mb-6 bg-cream/30">
                           <img
@@ -376,8 +376,8 @@ function OurStoryContent() {
                     </div>
 
                     {/* Timeline Spine Node */}
-                    <div className="absolute left-4 md:left-1/2 -translate-x-1/2 z-10 flex items-center justify-center w-10 h-10 rounded-full bg-cream border-2 border-gold shadow-md">
-                      <IconComponent className="w-5 h-5 text-gold" />
+                    <div className="absolute left-4 md:left-1/2 -translate-x-1/2 z-10 flex items-center justify-center w-[38px] h-[38px] rounded-full bg-white border-2 border-[#C6A75E] shadow-sm">
+                      <IconComponent size={18} className="text-[#C6A75E]" strokeWidth={1.5} />
                     </div>
 
                     {/* Empty spacer side */}

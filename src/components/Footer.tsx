@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { Settings } from "lucide-react";
 import { getNavigationSettings } from "../lib/site/getNavigationSettings";
 
 export default function Footer() {
@@ -24,9 +23,9 @@ export default function Footer() {
   return (
     <footer className="bg-charcoal text-cream py-16 border-t border-cream/10 relative overflow-hidden">
       <div className="max-w-7xl mx-auto px-6 md:px-12">
-        <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-12">
+        <div className="flex flex-col items-center md:flex-row justify-between md:items-center text-center md:text-left gap-12">
           {/* Brand & Copyright */}
-          <div className="text-left">
+          <div className="flex flex-col items-center md:items-start text-center md:text-left">
             <Link
               to="/"
               className="flex items-center font-serif text-3xl tracking-wider font-semibold text-cream mb-4"
@@ -52,7 +51,7 @@ export default function Footer() {
           </div>
 
           {/* Social & Delivery Links */}
-          <div className="flex flex-wrap gap-8">
+          <div className="flex flex-wrap justify-center md:justify-end gap-6 md:gap-8">
             <a
               href="https://instagram.com"
               target="_blank"
@@ -83,10 +82,15 @@ export default function Footer() {
         {/* Subtle Admin Link */}
         <Link
           to="/admin"
-          className="absolute bottom-6 right-6 text-cream/10 hover:text-gold hover:scale-110 transition-all duration-500 group"
-          aria-label="Admin Dashboard"
+          className="absolute bottom-[18px] right-[18px] opacity-35 hover:opacity-90 cursor-pointer"
+          style={{ transition: "opacity 250ms ease" }}
+          aria-label="Admin Access"
         >
-          <Settings size={14} className="group-hover:rotate-90 transition-transform duration-500" />
+          <img
+            src="/logo-icon.png"
+            alt=""
+            className="w-[14px] h-[14px] object-contain logo-white"
+          />
         </Link>
       </div>
     </footer>

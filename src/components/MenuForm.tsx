@@ -85,9 +85,9 @@ export default function MenuForm({ item, categories, onSubmit, onClose }: MenuFo
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, y: 20 }}
-      className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm"
+      className="fixed inset-0 z-50 flex items-center justify-center p-0 sm:p-4 bg-black/60 backdrop-blur-sm"
     >
-      <div className="bg-[#1a1a1a] border border-[#3a3a3a] rounded-2xl w-full max-w-2xl overflow-hidden shadow-2xl">
+      <div className="bg-[#1a1a1a] border border-[#3a3a3a] rounded-none sm:rounded-2xl w-full h-full sm:h-auto sm:max-w-2xl overflow-hidden shadow-2xl flex flex-col">
         <div className="flex items-center justify-between p-6 border-b border-[#3a3a3a]">
           <h2 className="text-xl font-semibold text-[#d4af37]">
             {item ? 'Edit Menu Item' : 'Add New Menu Item'}
@@ -100,7 +100,7 @@ export default function MenuForm({ item, categories, onSubmit, onClose }: MenuFo
           </button>
         </div>
 
-        <form onSubmit={handleSubmit} className="p-6 space-y-6 overflow-y-auto max-h-[80vh]">
+        <form onSubmit={handleSubmit} className="p-6 space-y-6 overflow-y-auto flex-1 sm:max-h-[80vh]">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div className="space-y-4">
               <div>

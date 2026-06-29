@@ -141,7 +141,7 @@ export default function LocationDetails() {
                 </span>
               ))}
             </div>
-            <h1 className="font-serif text-5xl md:text-7xl lg:text-8xl text-charcoal leading-tight mb-4">
+            <h1 className="font-serif text-4xl sm:text-5xl md:text-7xl lg:text-8xl text-charcoal leading-tight mb-4">
               {location.name}
             </h1>
             <div className="flex items-center gap-2 text-charcoal/80 text-lg md:text-xl font-light">
@@ -205,7 +205,7 @@ export default function LocationDetails() {
             viewport={{ once: true }}
             className="lg:col-span-5"
           >
-            <div className="bg-white rounded-[3rem] p-10 shadow-soft sticky top-32 space-y-12">
+            <div className="bg-white rounded-[3rem] p-10 shadow-soft lg:sticky lg:top-32 space-y-12">
               <div>
                 <h3 className="font-serif text-3xl text-charcoal italic mb-8">Details</h3>
                 <div className="space-y-8">

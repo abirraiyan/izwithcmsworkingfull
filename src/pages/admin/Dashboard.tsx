@@ -22,7 +22,7 @@ import { motion, AnimatePresence } from "motion/react";
 import toast from "react-hot-toast";
 
 export default function AdminDashboard() {
-  const [isSidebarOpen, setIsSidebarOpen] = useState(true);
+  const [isSidebarOpen, setIsSidebarOpen] = useState(window.innerWidth >= 1024);
   const [userEmail, setUserEmail] = useState<string | null>(null);
   const [stats, setStats] = useState({ items: 0, categories: 0, gallery: 0, locations: 0, testimonials: 0 });
   const navigate = useNavigate();

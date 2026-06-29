@@ -34,14 +34,6 @@ class ErrorBoundary extends Component<{children: ReactNode}, {hasError: boolean}
 function GetToKnowUsContent() {
   const heroRef = useRef<HTMLDivElement>(null);
   const quoteRef = useRef<HTMLDivElement>(null);
-  const [isMobile, setIsMobile] = useState(false);
-
-  useEffect(() => {
-    const checkMobile = () => setIsMobile(window.innerWidth < 768);
-    checkMobile();
-    window.addEventListener("resize", checkMobile);
-    return () => window.removeEventListener("resize", checkMobile);
-  }, []);
 
   // Update SEO metadata
   useEffect(() => {
@@ -70,8 +62,8 @@ function GetToKnowUsContent() {
   const heroTextY = useTransform(heroScroll, [0, 1], ["0%", "40%"]);
   const heroOpacity = useTransform(heroScroll, [0, 1], [1, 0.2]);
 
-  // Framer Motion helper for conditional responsive animations
-  const anim = (props: any) => isMobile ? {} : props;
+  // Framer Motion helper for responsive animations
+  const anim = (props: any) => props;
 
   // Values card data
   const values = [
@@ -170,7 +162,7 @@ function GetToKnowUsContent() {
             animate={{ y: [0, 8, 0] }}
             transition={{ repeat: Infinity, duration: 1.5, ease: "easeInOut" }}
           >
-            <ChevronDown className="w-5 h-5 text-gold" />
+            <ChevronDown size={20} strokeWidth={1.5} className="text-gold" />
           </motion.div>
         </motion.div>
       </section>
@@ -182,7 +174,7 @@ function GetToKnowUsContent() {
             {...anim({
               initial: { opacity: 0, x: -30 },
               whileInView: { opacity: 1, x: 0 },
-              viewport: { once: true, margin: "-100px" },
+              viewport: { once: true },
               transition: { duration: 0.8 }
             })}
             className="space-y-6"
@@ -207,7 +199,7 @@ function GetToKnowUsContent() {
             {...anim({
               initial: { opacity: 0, scale: 0.96, y: 20 },
               whileInView: { opacity: 1, scale: 1, y: 0 },
-              viewport: { once: true, margin: "-100px" },
+              viewport: { once: true },
               transition: { duration: 0.8 }
             })}
             className="relative aspect-[4/5] rounded-[2rem] overflow-hidden shadow-xl border border-charcoal/5 group"
@@ -222,31 +214,64 @@ function GetToKnowUsContent() {
         </div>
       </section>
 
-      {/* 3. The People Behind IZ Section (Redesigned Magazine Layout) */}
-      <section className="py-32 md:py-48 bg-[#FAF8F5] border-t border-cream">
-        <div className="max-w-7xl mx-auto px-6 md:px-12">
-          {/* Header */}
+      {/* 3. The People Behind IZ - Premium Editorial Hero Section */}
+      <section 
+        className="w-full h-[380px] md:h-[500px] lg:h-[600px] relative flex flex-col justify-center items-center text-center px-6 overflow-hidden bg-charcoal mb-24 md:mb-32 team-hero-bg"
+      >
+        <style dangerouslySetInnerHTML={{__html: `
+          .team-hero-bg {
+            background-image: url('/images/team-hero.jpg');
+            background-size: cover;
+            background-position: center top;
+            background-repeat: no-repeat;
+          }
+          @media (min-width: 768px) {
+            .team-hero-bg {
+              background-position: center;
+            }
+          }
+        `}} />
+
+        {/* Mobile Gradient Overlay (65% to 55%) */}
+        <div 
+          className="absolute inset-0 z-0 md:hidden" 
+          style={{
+            background: "linear-gradient(rgba(20,20,20,.65), rgba(20,20,20,.55))"
+          }}
+        />
+
+        {/* Desktop/Tablet Gradient Overlay (55% to 45%) */}
+        <div 
+          className="absolute inset-0 z-0 hidden md:block" 
+          style={{
+            background: "linear-gradient(rgba(20,20,20,.55), rgba(20,20,20,.45))"
+          }}
+        />
+
+        {/* Centered Content */}
+        <div className="relative z-10 max-w-4xl mx-auto py-10 md:py-20 flex flex-col items-center px-6">
           <motion.div
-            {...anim({
-              initial: { opacity: 0, y: 30 },
-              whileInView: { opacity: 1, y: 0 },
-              viewport: { once: true, margin: "-100px" },
-              transition: { duration: 1, ease: [0.16, 1, 0.3, 1] }
-            })}
-            className="text-center max-w-3xl mx-auto mb-28"
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
+            className="flex flex-col items-center"
           >
-            <span className="text-gold uppercase tracking-[0.35em] text-xs font-semibold mb-6 block">
-              Craft & Community
+            <span className="text-[#C6A75E] uppercase tracking-[0.4em] text-xs font-bold mb-4 block">
+              CRAFT & COMMUNITY
             </span>
-            <h2 className="font-serif text-4xl md:text-6xl text-charcoal leading-tight">
-              The People <span className="italic text-mocha font-light">Behind IZ</span>
+            <h2 className="font-serif text-[38px] md:text-6xl lg:text-7xl text-white leading-tight mb-6">
+              The People <span className="italic text-[#C6A75E] font-light">Behind IZ</span>
             </h2>
-            <div className="w-16 h-[1px] bg-gold/40 mx-auto mt-8 mb-6" />
-            <p className="text-charcoal/60 font-light text-base md:text-lg max-w-xl mx-auto leading-relaxed">
-              Meet the specialists whose dedicated daily habits and values shape the rhythm of our sanctuaries.
+            <p className="text-white/90 text-base md:text-lg font-light tracking-wide max-w-xl mx-auto leading-relaxed">
+              Meet the specialists whose dedication, craftsmanship and hospitality create the IZ experience every day.
             </p>
           </motion.div>
+        </div>
+      </section>
 
+      {/* 3b. Stories Stack Section */}
+      <section className="pb-32 md:pb-48 bg-[#FAF8F5]">
+        <div className="max-w-7xl mx-auto px-6 md:px-12">
           {/* Stories Stack */}
           <div className="space-y-40 md:space-y-56">
             {teamStories.map((story, idx) => {
@@ -263,7 +288,7 @@ function GetToKnowUsContent() {
                     {...anim({
                       initial: { opacity: 0, x: isEven ? -40 : 40, y: 20 },
                       whileInView: { opacity: 1, x: 0, y: 0 },
-                      viewport: { once: true, margin: "-100px" },
+                      viewport: { once: true },
                       transition: { duration: 1.2, ease: [0.16, 1, 0.3, 1] }
                     })}
                     className="w-full lg:w-[50%] relative"
@@ -290,7 +315,7 @@ function GetToKnowUsContent() {
                     {...anim({
                       initial: { opacity: 0, x: isEven ? 40 : -40, y: 20 },
                       whileInView: { opacity: 1, x: 0, y: 0 },
-                      viewport: { once: true, margin: "-100px" },
+                      viewport: { once: true },
                       transition: { duration: 1.2, ease: [0.16, 1, 0.3, 1], delay: 0.1 }
                     })}
                     className="w-full lg:w-[50%] space-y-8 flex flex-col justify-center"
@@ -360,7 +385,7 @@ function GetToKnowUsContent() {
                 className="bg-white border border-[#c6a75e]/15 hover:border-[#c6a75e]/40 rounded-[2rem] p-8 md:p-10 shadow-soft hover:shadow-lg hover:-translate-y-2 transition-all duration-500 flex flex-col items-center text-center group h-full"
               >
                 <div className="w-16 h-16 bg-[#FAF8F5] border border-[#c6a75e]/25 text-[#c6a75e] group-hover:bg-[#c6a75e] group-hover:text-cream rounded-full flex items-center justify-center mb-6 transition-all duration-300">
-                  <IconComponent className="w-7 h-7" />
+                  <IconComponent size={24} strokeWidth={1.5} />
                 </div>
                 <h3 className="font-serif text-2xl font-medium mb-4 text-charcoal">
                   {val.title}
@@ -393,7 +418,7 @@ function GetToKnowUsContent() {
             })}
             className="flex flex-col items-center gap-6"
           >
-            <Sparkles className="w-6 h-6 text-gold animate-pulse" />
+            <Sparkles size={24} strokeWidth={1.5} className="text-gold animate-pulse" />
             <blockquote className="font-serif text-2xl md:text-4xl text-cream leading-relaxed italic max-w-3xl">
               "A café is not just a place to buy coffee; it is a cultural sanctuary where time slows down and connection begins."
             </blockquote>
@@ -431,7 +456,7 @@ function GetToKnowUsContent() {
               className="inline-flex items-center justify-center gap-3 px-8 py-4 bg-gold hover:bg-[#6f4e37] text-white font-semibold tracking-widest uppercase rounded-full shadow-md hover:scale-105 active:scale-95 transition-all duration-300 w-full sm:w-auto text-sm"
             >
               <span>Explore Locations</span>
-              <ArrowRight size={16} />
+              <ArrowRight size={20} strokeWidth={1.5} />
             </Link>
           </div>
         </div>

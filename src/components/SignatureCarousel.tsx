@@ -110,7 +110,7 @@ export default function SignatureCarousel() {
                 : "opacity-30 cursor-not-allowed"
             }`}
           >
-            <ChevronLeft size={24} />
+            <ChevronLeft size={24} strokeWidth={1.5} />
           </button>
           <button
             onClick={() => scroll("right")}
@@ -121,7 +121,7 @@ export default function SignatureCarousel() {
                 : "opacity-30 cursor-not-allowed"
             }`}
           >
-            <ChevronRight size={24} />
+            <ChevronRight size={24} strokeWidth={1.5} />
           </button>
         </div>
       </div>
@@ -165,7 +165,7 @@ export default function SignatureCarousel() {
                       to="/menu"
                       className="bg-gold text-white p-3 rounded-full hover:bg-white hover:text-charcoal transition-all"
                     >
-                      <ArrowRight size={20} />
+                      <ArrowRight size={20} strokeWidth={1.5} />
                     </Link>
                   </div>
                 </div>
@@ -205,8 +205,8 @@ export default function SignatureCarousel() {
               to="/menu"
               className="flex flex-col items-center justify-center h-full aspect-[4/5] rounded-3xl border-2 border-dashed border-charcoal/10 bg-white/50 hover:bg-white hover:border-gold transition-all group/view-all"
             >
-              <div className="w-16 h-16 rounded-full bg-cream flex items-center justify-center mb-4 group-hover/view-all:scale-110 transition-transform">
-                <ArrowRight className="text-mocha" size={24} />
+              <div className="w-16 h-16 rounded-full bg-cream flex items-center justify-center mb-4 group-hover/more:scale-110 transition-transform">
+                <ArrowRight className="text-mocha" size={22} strokeWidth={1.5} />
               </div>
               <span className="font-serif text-2xl text-charcoal">View Full Menu</span>
               <p className="text-charcoal/40 text-sm mt-2">Explore our entire collection</p>

@@ -93,7 +93,7 @@ export default function Testimonials() {
               key={`${testimonial.id}-${index}`}
               whileHover={{ scale: 1.05, y: -10 }}
               transition={{ type: "spring", stiffness: 300, damping: 20 }}
-              className="inline-block w-[350px] md:w-[450px] bg-white p-10 rounded-[2.5rem] shadow-soft border border-charcoal/5 whitespace-normal flex-shrink-0"
+              className="inline-block w-[280px] sm:w-[350px] md:w-[450px] bg-white p-6 sm:p-8 md:p-10 rounded-[2.5rem] shadow-soft border border-charcoal/5 whitespace-normal flex-shrink-0"
             >
               <div className="flex flex-col h-full justify-between">
                 <div className="mb-8">
