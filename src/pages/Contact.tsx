@@ -398,7 +398,7 @@ function ContactContent() {
                 <Mail size={20} strokeWidth={1.5} />
               </div>
               <h4 className="text-xs uppercase tracking-widest text-cream/40 font-bold">Email Inbox</h4>
-              <p className="text-sm font-medium">support@izcafe.com</p>
+              <p className="text-sm font-medium">info@iz.cafe</p>
             </div>
 
             <div className="space-y-3">
