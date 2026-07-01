@@ -42,7 +42,13 @@ export default function Footer() {
                 reserved.
               </p>
               <p className="text-cream/50 text-xs font-light uppercase tracking-widest">
-                Email: [info@iz.cafe]
+                Email:{" "}
+                <a
+                  href="mailto:info@iz.cafe"
+                  className="hover:text-gold focus:outline-none focus-visible:ring-1 focus-visible:ring-[#c6a75e] rounded transition-colors duration-300 lowercase font-normal"
+                >
+                  info@iz.cafe
+                </a>
               </p>
               <p className="text-cream/30 text-[10px] font-medium uppercase tracking-[0.2em]">
                 Built by <a href="https://xceptionist.com/" target="_blank" rel="noopener noreferrer" className="text-gold hover:text-white transition-colors duration-300">Xceptionist</a>
