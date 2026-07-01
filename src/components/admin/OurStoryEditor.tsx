@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { OurStoryContent, OurStoryPhilosophyCard, OurStoryGalleryImage } from '../../types';
 import { updateOurStoryContent } from '../../lib/site/ourStoryContent';
-import MediaUploader from './MediaUploader';
+import UniversalUploader from './UniversalUploader';
 import { Save, Plus, Trash2, ArrowUp, ArrowDown } from 'lucide-react';
 import toast from 'react-hot-toast';
 
@@ -174,13 +174,12 @@ export default function OurStoryEditor({ initialContent, onRefresh }: OurStoryEd
             </div>
           </div>
           <div>
-            <MediaUploader
+            <UniversalUploader
               folder="our_story"
               label="Hero Background Image"
               accept="image/*,video/*"
-              currentMedia={content.hero?.hero_image}
-              onUploadSuccess={(asset) => updateSection('hero', 'hero_image', asset.url)}
-              onRemove={() => updateSection('hero', 'hero_image', '')}
+              value={content.hero?.hero_image}
+              onChange={(url) => updateSection('hero', 'hero_image', url as string || '')}
             />
           </div>
         </div>
@@ -257,13 +256,12 @@ export default function OurStoryEditor({ initialContent, onRefresh }: OurStoryEd
             </div>
           </div>
           <div>
-            <MediaUploader
+            <UniversalUploader
               folder="our_story"
               label="Side Image"
               accept="image/*,video/*"
-              currentMedia={content.journey?.side_image}
-              onUploadSuccess={(asset) => updateSection('journey', 'side_image', asset.url)}
-              onRemove={() => updateSection('journey', 'side_image', '')}
+              value={content.journey?.side_image}
+              onChange={(url) => updateSection('journey', 'side_image', url as string || '')}
             />
           </div>
         </div>
@@ -325,13 +323,12 @@ export default function OurStoryEditor({ initialContent, onRefresh }: OurStoryEd
                 <button onClick={() => removePhilosophyCard(card.id)} className="p-1 text-red-400 hover:text-red-300 mt-auto"><Trash2 size={16}/></button>
               </div>
               <div className="w-48">
-                <MediaUploader
+                <UniversalUploader
                   folder="our_story"
                   label="Image"
                   accept="image/*,video/*"
-                  currentMedia={card.image}
-                  onUploadSuccess={(asset) => updatePhilosophyCard(card.id, 'image', asset.url)}
-                  onRemove={() => updatePhilosophyCard(card.id, 'image', '')}
+                  value={card.image}
+                  onChange={(url) => updatePhilosophyCard(card.id, 'image', url as string || '')}
                 />
               </div>
               <div className="flex-1 space-y-4">
@@ -373,13 +370,12 @@ export default function OurStoryEditor({ initialContent, onRefresh }: OurStoryEd
                 <button onClick={() => removeGalleryImage(img.id)} className="p-1 text-red-400 hover:text-red-300 mt-auto"><Trash2 size={16}/></button>
               </div>
               <div className="w-1/2">
-                <MediaUploader
+                <UniversalUploader
                   folder="our_story"
                   label="Gallery Photo"
                   accept="image/*,video/*"
-                  currentMedia={img.image_url}
-                  onUploadSuccess={(asset) => updateGalleryImage(img.id, 'image_url', asset.url)}
-                  onRemove={() => updateGalleryImage(img.id, 'image_url', '')}
+                  value={img.image_url}
+                  onChange={(url) => updateGalleryImage(img.id, 'image_url', url as string || '')}
                 />
               </div>
               <div className="flex-1 flex flex-col justify-center">
@@ -446,13 +442,12 @@ export default function OurStoryEditor({ initialContent, onRefresh }: OurStoryEd
               </div>
            </div>
            <div>
-            <MediaUploader
+            <UniversalUploader
               folder="our_story"
               label="Founder Photo"
               accept="image/*,video/*"
-              currentMedia={content.founder?.founder_photo}
-              onUploadSuccess={(asset) => updateSection('founder', 'founder_photo', asset.url)}
-              onRemove={() => updateSection('founder', 'founder_photo', '')}
+              value={content.founder?.founder_photo}
+              onChange={(url) => updateSection('founder', 'founder_photo', url as string || '')}
             />
           </div>
         </div>

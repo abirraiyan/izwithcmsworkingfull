@@ -1,8 +1,8 @@
-import { useState, ChangeEvent, KeyboardEvent, FormEvent } from "react";
-import { X, Save, Upload, Plus, Loader2 } from "lucide-react";
+import { useState, KeyboardEvent, FormEvent } from "react";
+import { X, Save, Loader2 } from "lucide-react";
 import { motion, AnimatePresence } from "motion/react";
 import { Location } from "../../types";
-import { uploadLocationMedia } from "../../lib/supabase";
+import UniversalUploader from "./UniversalUploader";
 import toast from "react-hot-toast";
 
 interface LocationFormProps {
@@ -13,7 +13,7 @@ interface LocationFormProps {
 
 export default function LocationForm({ location, onSubmit: onSave, onClose }: LocationFormProps) {
   const [loading, setLoading] = useState(false);
-  const [uploading, setUploading] = useState(false);
+
   const [formData, setFormData] = useState<any>({
     name: location?.name || "",
     address: location?.address || "",
@@ -33,45 +33,10 @@ export default function LocationForm({ location, onSubmit: onSave, onClose }: Lo
   const [tags, setTags] = useState<string[]>(
     location?.location_tags?.map(t => t.label) || []
   );
-  const [tagInput, setTagInput] = useState("");
-
   const [gallery, setGallery] = useState<string[]>(
     location?.location_gallery?.map(g => g.image_url) || []
   );
-
-  const handleCoverUpload = async (e: ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
-    if (!file) return;
-
-    try {
-      setUploading(true);
-      const url = await uploadLocationMedia(file, location?.id || 'new');
-      setFormData({ ...formData, cover_image: url });
-      toast.success("Cover image uploaded");
-    } catch (error: any) {
-      toast.error("Upload failed: " + error.message);
-    } finally {
-      setUploading(false);
-    }
-  };
-
-  const handleGalleryUpload = async (e: ChangeEvent<HTMLInputElement>) => {
-    const files = Array.from(e.target.files || []);
-    if (files.length === 0) return;
-
-    try {
-      setUploading(true);
-      const urls = await Promise.all(
-        files.map((file: any) => uploadLocationMedia(file as File, location?.id || 'new'))
-      );
-      setGallery([...gallery, ...urls]);
-      toast.success(`${files.length} gallery images uploaded`);
-    } catch (error: any) {
-      toast.error("Upload failed: " + error.message);
-    } finally {
-      setUploading(false);
-    }
-  };
+  const [tagInput, setTagInput] = useState("");
 
   const addTag = (e: KeyboardEvent) => {
     if (e.key === "Enter" && tagInput.trim()) {
@@ -85,10 +50,6 @@ export default function LocationForm({ location, onSubmit: onSave, onClose }: Lo
 
   const removeTag = (tagToRemove: string) => {
     setTags(tags.filter(t => t !== tagToRemove));
-  };
-
-  const removeGalleryImage = (index: number) => {
-    setGallery(gallery.filter((_, i) => i !== index));
   };
 
   const handleSubmit = async (e: FormEvent) => {
@@ -322,70 +283,18 @@ export default function LocationForm({ location, onSubmit: onSave, onClose }: Lo
 
             {/* Right Column: Media */}
             <div className="space-y-8">
-              {/* Cover Image */}
-              <div className="space-y-4">
-                <label className="block text-xs font-bold uppercase tracking-widest text-gray-400 text-white">Cover Image</label>
-                <div className="relative group aspect-video rounded-3xl overflow-hidden bg-[#2a2a2a] border-2 border-dashed border-[#3a3a3a] hover:border-[#d4af37] transition-all">
-                  {formData.cover_image ? (
-                    <>
-                      <img
-                        src={formData.cover_image}
-                        alt="Cover Preview"
-                        className="w-full h-full object-cover"
-                      />
-                      <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
-                        <label className="cursor-pointer bg-white text-black px-6 py-3 rounded-full font-bold uppercase tracking-widest text-xs transition-all hover:scale-105">
-                          Change Image
-                          <input type="file" className="hidden" accept="image/*" onChange={handleCoverUpload} disabled={uploading} />
-                        </label>
-                      </div>
-                    </>
-                  ) : (
-                    <label className="absolute inset-0 flex flex-col items-center justify-center cursor-pointer">
-                      <div className="p-4 bg-[#1a1a1a] rounded-full text-gray-400 mb-2 group-hover:text-[#d4af37]">
-                        <Upload size={32} />
-                      </div>
-                      <span className="text-gray-400 text-xs font-bold uppercase tracking-widest group-hover:text-white">Upload Cover</span>
-                      <input type="file" className="hidden" accept="image/*" onChange={handleCoverUpload} disabled={uploading} />
-                    </label>
-                  )}
-                  {uploading && (
-                    <div className="absolute inset-0 bg-black/60 flex items-center justify-center">
-                      <Loader2 className="animate-spin text-[#d4af37]" />
-                    </div>
-                  )}
-                </div>
-              </div>
+              <UniversalUploader
+                label="Cover Image"
+                value={formData.cover_image}
+                onChange={(url) => setFormData({ ...formData, cover_image: url as string || "" })}
+              />
 
-              {/* Gallery Images */}
-              <div className="space-y-4">
-                <div className="flex items-center justify-between">
-                  <label className="block text-xs font-bold uppercase tracking-widest text-gray-400 text-white">Space Gallery</label>
-                  <label className="cursor-pointer text-[10px] font-bold uppercase tracking-widest text-[#d4af37] hover:underline">
-                    Add Media
-                    <input type="file" className="hidden" accept="image/*" multiple onChange={handleGalleryUpload} disabled={uploading} />
-                  </label>
-                </div>
-                
-                <div className="grid grid-cols-3 gap-3 p-4 bg-[#2a2a2a] border border-[#3a3a3a] rounded-[2rem] min-h-[150px]">
-                  {gallery.map((url, i) => (
-                    <div key={i} className="relative aspect-square rounded-2xl overflow-hidden group">
-                      <img src={url} alt="Gallery item" className="w-full h-full object-cover" />
-                      <button
-                        type="button"
-                        onClick={() => removeGalleryImage(i)}
-                        className="absolute top-2 right-2 p-1.5 bg-red-500 text-white rounded-full opacity-0 group-hover:opacity-100 transition-opacity"
-                      >
-                        <X size={12} />
-                      </button>
-                    </div>
-                  ))}
-                  <label className="flex flex-col items-center justify-center border-2 border-dashed border-[#3a3a3a] rounded-2xl text-gray-500 hover:text-[#d4af37] hover:border-[#d4af37] cursor-pointer transition-all aspect-square">
-                    <Plus size={24} />
-                    <input type="file" className="hidden" accept="image/*" multiple onChange={handleGalleryUpload} disabled={uploading} />
-                  </label>
-                </div>
-              </div>
+              <UniversalUploader
+                label="Space Gallery"
+                value={gallery}
+                multiple
+                onChange={(urls) => setGallery((urls as string[]) || [])}
+              />
             </div>
           </div>
 
@@ -399,7 +308,7 @@ export default function LocationForm({ location, onSubmit: onSave, onClose }: Lo
             </button>
             <button
               type="submit"
-              disabled={loading || uploading}
+              disabled={loading}
               className="flex items-center gap-3 px-10 py-4 bg-[#d4af37] hover:bg-[#c4a030] text-black font-bold uppercase tracking-widest text-xs rounded-full transition-all shadow-lg shadow-[#d4af37]/20 disabled:opacity-50"
             >
               {loading ? (

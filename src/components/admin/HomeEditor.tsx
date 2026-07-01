@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 import { SiteContent, GalleryItem } from '../../types';
 import { updateHomeContent } from '../../lib/site/getHomeContent';
-import { addGalleryItem, deleteGalleryItem, uploadGalleryMedia } from '../../lib/supabase';
+import { addGalleryItem, deleteGalleryItem } from '../../lib/supabase';
 import { motion, AnimatePresence } from 'motion/react';
 import { Trash2, Upload, Loader2, Save, Image as ImageIcon, Video, Link as LinkIcon, Type, Eye, HelpCircle } from 'lucide-react';
 import toast from 'react-hot-toast';
 import { getImageUrl } from '../../lib/image';
-import MediaUploader from './MediaUploader';
+import UniversalUploader from './UniversalUploader';
 
 interface HomeEditorProps {
   initialContent: SiteContent;
@@ -18,7 +18,7 @@ export default function HomeEditor({ initialContent, initialGallery, onRefresh }
   const [content, setContent] = useState<SiteContent>(initialContent || {});
   const [activeTab, setActiveTab] = useState<'hero' | 'story' | 'founder' | 'gallery'>('hero');
   const [saving, setSaving] = useState(false);
-  const [uploading, setUploading] = useState(false);
+
 
   const handleSave = async () => {
     try {
@@ -33,29 +33,7 @@ export default function HomeEditor({ initialContent, initialGallery, onRefresh }
     }
   };
 
-  const handleGalleryUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
-    if (!file) return;
 
-    try {
-      setUploading(true);
-      const isVideo = file.type.startsWith('video/');
-      const media_url = await uploadGalleryMedia(file);
-      
-      await addGalleryItem({
-        media_url,
-        media_type: isVideo ? 'video' : 'image',
-        is_featured: true
-      });
-      
-      toast.success('Gallery item added');
-      onRefresh();
-    } catch (err: any) {
-      toast.error(err.message || 'Error uploading file');
-    } finally {
-      setUploading(false);
-    }
-  };
 
   const handleDeleteGalleryItem = async (id: string) => {
     if (!confirm('Are you sure you want to remove this from the home gallery?')) return;
@@ -148,19 +126,17 @@ export default function HomeEditor({ initialContent, initialGallery, onRefresh }
               </div>
 
               <div className="space-y-6">
-                <MediaUploader
-                  currentMedia={content.hero_video_url}
-                  onUploadSuccess={(asset) => setContent({ ...content, hero_video_url: asset.url })}
-                  onRemove={() => setContent({ ...content, hero_video_url: '' })}
+                <UniversalUploader
+                  value={content.hero_video_url}
+                  onChange={(url) => setContent({ ...content, hero_video_url: url as string || '' })}
                   folder="hero"
                   label="Upload Hero Video"
                   accept="video/mp4,video/webm,video/quicktime"
                 />
 
-                <MediaUploader
-                  currentMedia={content.hero_poster_url}
-                  onUploadSuccess={(asset) => setContent({ ...content, hero_poster_url: asset.url })}
-                  onRemove={() => setContent({ ...content, hero_poster_url: '' })}
+                <UniversalUploader
+                  value={content.hero_poster_url}
+                  onChange={(url) => setContent({ ...content, hero_poster_url: url as string || '' })}
                   folder="poster"
                   label="Upload Fallback Poster"
                   accept="image/jpeg,image/png,image/webp"
@@ -344,25 +320,29 @@ export default function HomeEditor({ initialContent, initialGallery, onRefresh }
               exit={{ opacity: 0, y: -10 }}
               className="space-y-6"
             >
-              <div className="flex items-center justify-between mb-6">
+              <div className="space-y-4 mb-6">
                 <h2 className="text-2xl font-serif text-[#d4af37]">Home Gallery</h2>
-                
-                <div className="relative">
-                  <input
-                    type="file"
-                    accept="image/*,video/*"
-                    onChange={handleGalleryUpload}
-                    disabled={uploading}
-                    className="absolute inset-0 w-full h-full opacity-0 cursor-pointer disabled:cursor-not-allowed"
-                  />
-                  <button
-                    disabled={uploading}
-                    className="flex items-center gap-2 bg-[#2a2a2a] hover:bg-white/10 text-white px-4 py-2 rounded-xl border border-[#3a3a3a] transition-colors"
-                  >
-                    {uploading ? <Loader2 size={18} className="animate-spin" /> : <Upload size={18} />}
-                    {uploading ? 'Uploading...' : 'Upload Media'}
-                  </button>
-                </div>
+                <UniversalUploader
+                  label="Upload New Media to Gallery"
+                  value={null}
+                  onChange={async (url) => {
+                    const urlStr = url as string;
+                    if (!urlStr) return;
+                    const isVideo = urlStr.match(/\.(mp4|webm|mov)$/i) !== null || urlStr.includes('/video/upload/');
+                    try {
+                      await addGalleryItem({
+                        media_url: urlStr,
+                        media_type: isVideo ? 'video' : 'image',
+                        is_featured: true
+                      });
+                      toast.success('Gallery item added');
+                      onRefresh();
+                    } catch (err: any) {
+                      toast.error(err.message || 'Error uploading file');
+                    }
+                  }}
+                  accept="image/*,video/*"
+                />
               </div>
 
               <div className="grid grid-cols-2 md:grid-cols-4 gap-4">

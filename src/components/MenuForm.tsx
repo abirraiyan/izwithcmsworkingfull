@@ -2,7 +2,7 @@ import { useState, useEffect, FormEvent, Fragment } from 'react';
 import { X, Save, Loader2, Plus, Trash2 } from 'lucide-react';
 import { motion } from 'motion/react';
 import { Category, MenuItem } from '../types';
-import ImageUpload from './ImageUpload';
+import UniversalUploader from './admin/UniversalUploader';
 import toast from 'react-hot-toast';
 
 interface MenuFormProps {
@@ -199,9 +199,10 @@ export default function MenuForm({ item, categories, onSubmit, onClose }: MenuFo
             </div>
 
             <div className="space-y-4">
-              <ImageUpload
-                currentUrl={formData.image_url}
-                onUpload={(url) => setFormData({ ...formData, image_url: url })}
+              <UniversalUploader
+                label="Menu Item Image"
+                value={formData.image_url}
+                onChange={(url) => setFormData({ ...formData, image_url: url as string || '' })}
               />
             </div>
           </div>

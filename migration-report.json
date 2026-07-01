@@ -1,0 +1,559 @@
+[
+  {
+    "table": "menu_items",
+    "column": "image_url",
+    "recordId": "a3df4d50-f8f1-4075-885a-b6d283c73b8f",
+    "oldUrl": "https://cxbsldaoodddbqbfjqch.supabase.co/storage/v1/object/public/menu-images/9bf6a1c3-f2e4-41e8-9d0c-df7b4deead0b/1775134846575-u0ldp34ewh.png",
+    "newUrl": "https://res.cloudinary.com/djnv9soqm/image/upload/v1782894625/hvwd3whczfw6h5ros4mu.png",
+    "status": "SUCCESS"
+  },
+  {
+    "table": "menu_items",
+    "column": "image_url",
+    "recordId": "de7f8219-9eca-4ebd-bf7b-82c90e771350",
+    "oldUrl": "https://cxbsldaoodddbqbfjqch.supabase.co/storage/v1/object/public/menu-images/9bf6a1c3-f2e4-41e8-9d0c-df7b4deead0b/1775137287110-s6ey701cp6m.png",
+    "newUrl": "https://res.cloudinary.com/djnv9soqm/image/upload/v1782894627/eqartzdgsyyzh2een4pa.png",
+    "status": "SUCCESS"
+  },
+  {
+    "table": "menu_items",
+    "column": "image_url",
+    "recordId": "b393b1fa-7213-4164-b180-4dc9426c7b29",
+    "oldUrl": "https://cxbsldaoodddbqbfjqch.supabase.co/storage/v1/object/public/menu-images/9bf6a1c3-f2e4-41e8-9d0c-df7b4deead0b/1775137351274-2vo74jyh8k6.png",
+    "newUrl": "https://res.cloudinary.com/djnv9soqm/image/upload/v1782894630/hzo7xmslwwo4p9g1bd45.png",
+    "status": "SUCCESS"
+  },
+  {
+    "table": "menu_items",
+    "column": "image_url",
+    "recordId": "c3d11775-606d-469c-a912-1bbb15bf1e20",
+    "oldUrl": "https://cxbsldaoodddbqbfjqch.supabase.co/storage/v1/object/public/menu-images/9bf6a1c3-f2e4-41e8-9d0c-df7b4deead0b/1775137399677-icn4k8azibr.png",
+    "newUrl": "https://res.cloudinary.com/djnv9soqm/image/upload/v1782894633/b4b6fwgugccqhgqukfp9.png",
+    "status": "SUCCESS"
+  },
+  {
+    "table": "menu_items",
+    "column": "image_url",
+    "recordId": "ac408e3f-93d2-4a30-85bb-6856d0bb5522",
+    "oldUrl": "https://cxbsldaoodddbqbfjqch.supabase.co/storage/v1/object/public/menu-images/9bf6a1c3-f2e4-41e8-9d0c-df7b4deead0b/1775137456758-wxtqt7w4dkc.png",
+    "newUrl": "https://res.cloudinary.com/djnv9soqm/image/upload/v1782894634/qnxjkvmsrvqgfhmck6am.png",
+    "status": "SUCCESS"
+  },
+  {
+    "table": "menu_items",
+    "column": "image_url",
+    "recordId": "d1dfd3ef-5167-4e6f-841d-978c4ed85a2c",
+    "oldUrl": "https://cxbsldaoodddbqbfjqch.supabase.co/storage/v1/object/public/menu-images/9bf6a1c3-f2e4-41e8-9d0c-df7b4deead0b/1775137484143-dqfhwhi64p4.png",
+    "newUrl": "https://res.cloudinary.com/djnv9soqm/image/upload/v1782894636/qcohwvxfvhcrgifocylv.png",
+    "status": "SUCCESS"
+  },
+  {
+    "table": "menu_items",
+    "column": "image_url",
+    "recordId": "e8e7a872-eec2-4dae-b1e0-ff24d19db344",
+    "oldUrl": "https://cxbsldaoodddbqbfjqch.supabase.co/storage/v1/object/public/menu-images/9bf6a1c3-f2e4-41e8-9d0c-df7b4deead0b/1775137515391-ranbwmbc46.png",
+    "newUrl": "https://res.cloudinary.com/djnv9soqm/image/upload/v1782894637/iyqwavmcag6jwrujyflw.png",
+    "status": "SUCCESS"
+  },
+  {
+    "table": "menu_items",
+    "column": "image_url",
+    "recordId": "6f686f0b-3945-4f50-bf4e-58f49e7fd94f",
+    "oldUrl": "https://cxbsldaoodddbqbfjqch.supabase.co/storage/v1/object/public/menu-images/9bf6a1c3-f2e4-41e8-9d0c-df7b4deead0b/1775137646864-b03yhji2kf5.png",
+    "newUrl": "https://res.cloudinary.com/djnv9soqm/image/upload/v1782894638/wykjrywvz2rhbjuzkh9c.png",
+    "status": "SUCCESS"
+  },
+  {
+    "table": "menu_items",
+    "column": "image_url",
+    "recordId": "a4929ac4-aa44-4f13-b802-020f5cfb7e58",
+    "oldUrl": "https://cxbsldaoodddbqbfjqch.supabase.co/storage/v1/object/public/menu-images/9bf6a1c3-f2e4-41e8-9d0c-df7b4deead0b/1775732659865-xit5lcu7hj.png",
+    "newUrl": "https://res.cloudinary.com/djnv9soqm/image/upload/v1782894639/mv7cvgwzr7ue1dk7zj44.png",
+    "status": "SUCCESS"
+  },
+  {
+    "table": "menu_items",
+    "column": "image_url",
+    "recordId": "b363f9b8-7908-4223-b308-d361202dc7eb",
+    "oldUrl": "https://cxbsldaoodddbqbfjqch.supabase.co/storage/v1/object/public/menu-images/9bf6a1c3-f2e4-41e8-9d0c-df7b4deead0b/1775138060966-jmbyikmtjse.png",
+    "newUrl": "https://res.cloudinary.com/djnv9soqm/image/upload/v1782894641/tjqjmgyj2uqrila2adzj.png",
+    "status": "SUCCESS"
+  },
+  {
+    "table": "menu_items",
+    "column": "image_url",
+    "recordId": "27a26bee-b2a9-456b-a03c-3ccc8977a13f",
+    "oldUrl": "https://cxbsldaoodddbqbfjqch.supabase.co/storage/v1/object/public/menu-images/9bf6a1c3-f2e4-41e8-9d0c-df7b4deead0b/1775138517212-ngykk7i1exd.png",
+    "newUrl": "https://res.cloudinary.com/djnv9soqm/image/upload/v1782894643/oficlkuboau1gnmqbsel.png",
+    "status": "SUCCESS"
+  },
+  {
+    "table": "menu_items",
+    "column": "image_url",
+    "recordId": "698c6681-8950-436b-98fb-36f8639427ff",
+    "oldUrl": "https://cxbsldaoodddbqbfjqch.supabase.co/storage/v1/object/public/menu-images/9bf6a1c3-f2e4-41e8-9d0c-df7b4deead0b/1775138618531-tdt8jicvoz.png",
+    "newUrl": "https://res.cloudinary.com/djnv9soqm/image/upload/v1782894645/lzewh658r6rfwtall7xd.png",
+    "status": "SUCCESS"
+  },
+  {
+    "table": "menu_items",
+    "column": "image_url",
+    "recordId": "03c129ad-2057-432b-829e-97803d666338",
+    "oldUrl": "https://cxbsldaoodddbqbfjqch.supabase.co/storage/v1/object/public/menu-images/9bf6a1c3-f2e4-41e8-9d0c-df7b4deead0b/1775138664456-va0prx5ffz.png",
+    "newUrl": "https://res.cloudinary.com/djnv9soqm/image/upload/v1782894646/m3ryqsyg6dj3nwc8tixw.png",
+    "status": "SUCCESS"
+  },
+  {
+    "table": "menu_items",
+    "column": "image_url",
+    "recordId": "cbf91eb6-243e-4383-8aa7-d0b69e8f7131",
+    "oldUrl": "https://cxbsldaoodddbqbfjqch.supabase.co/storage/v1/object/public/menu-images/9bf6a1c3-f2e4-41e8-9d0c-df7b4deead0b/1775733979323-w1ti9c3w72.png",
+    "newUrl": "https://res.cloudinary.com/djnv9soqm/image/upload/v1782894647/w5gy2kdsmu3k2cz70cwy.png",
+    "status": "SUCCESS"
+  },
+  {
+    "table": "menu_items",
+    "column": "image_url",
+    "recordId": "dd3d44aa-242d-4d3d-8036-ceb29c871f6e",
+    "oldUrl": "https://cxbsldaoodddbqbfjqch.supabase.co/storage/v1/object/public/menu-images/9bf6a1c3-f2e4-41e8-9d0c-df7b4deead0b/1775743219825-787qsiyodk.png",
+    "newUrl": "https://res.cloudinary.com/djnv9soqm/image/upload/v1782894649/spotwwqahshljhfgwwpn.png",
+    "status": "SUCCESS"
+  },
+  {
+    "table": "menu_items",
+    "column": "image_url",
+    "recordId": "01359359-a836-4c23-ac04-5e79160d0c64",
+    "oldUrl": "https://cxbsldaoodddbqbfjqch.supabase.co/storage/v1/object/public/menu-images/9bf6a1c3-f2e4-41e8-9d0c-df7b4deead0b/1775753075642-mbfa3ir002.png",
+    "newUrl": "https://res.cloudinary.com/djnv9soqm/image/upload/v1782894650/n1wisqxwc7cypfnkl7mt.png",
+    "status": "SUCCESS"
+  },
+  {
+    "table": "menu_items",
+    "column": "image_url",
+    "recordId": "5f62bc2e-4511-4f01-afc5-c11b26d45526",
+    "oldUrl": "https://cxbsldaoodddbqbfjqch.supabase.co/storage/v1/object/public/menu-images/9bf6a1c3-f2e4-41e8-9d0c-df7b4deead0b/1775753097433-gcn0x9qob55.png",
+    "newUrl": "https://res.cloudinary.com/djnv9soqm/image/upload/v1782894652/jkbm2brmtvegs9btcezp.png",
+    "status": "SUCCESS"
+  },
+  {
+    "table": "menu_items",
+    "column": "image_url",
+    "recordId": "65993325-c5e4-460d-a037-9725570ddfbc",
+    "oldUrl": "https://cxbsldaoodddbqbfjqch.supabase.co/storage/v1/object/public/menu-images/9bf6a1c3-f2e4-41e8-9d0c-df7b4deead0b/1775753134563-9m4025y3hr.png",
+    "newUrl": "https://res.cloudinary.com/djnv9soqm/image/upload/v1782894653/c4omqukfj1wynpcw2rgy.png",
+    "status": "SUCCESS"
+  },
+  {
+    "table": "menu_items",
+    "column": "image_url",
+    "recordId": "50d6575c-268a-4fad-bd1d-98b2fc9aa7e9",
+    "oldUrl": "https://cxbsldaoodddbqbfjqch.supabase.co/storage/v1/object/public/menu-images/9bf6a1c3-f2e4-41e8-9d0c-df7b4deead0b/1775753170715-5n15ibldh1r.png",
+    "newUrl": "https://res.cloudinary.com/djnv9soqm/image/upload/v1782894654/bulzmjybt8zrhytugtr8.png",
+    "status": "SUCCESS"
+  },
+  {
+    "table": "menu_items",
+    "column": "image_url",
+    "recordId": "81480972-8333-4492-ad41-727bdff480a3",
+    "oldUrl": "https://cxbsldaoodddbqbfjqch.supabase.co/storage/v1/object/public/menu-images/9bf6a1c3-f2e4-41e8-9d0c-df7b4deead0b/1776851426067-5512ultn9s6.png",
+    "newUrl": "https://res.cloudinary.com/djnv9soqm/image/upload/v1782894655/hkh0pbcxynpc2wzbbwqh.png",
+    "status": "SUCCESS"
+  },
+  {
+    "table": "menu_items",
+    "column": "image_url",
+    "recordId": "84a978ec-210d-4dac-b831-714746417e30",
+    "oldUrl": "https://cxbsldaoodddbqbfjqch.supabase.co/storage/v1/object/public/menu-images/9bf6a1c3-f2e4-41e8-9d0c-df7b4deead0b/1776851499192-e1etspi95s4.png",
+    "newUrl": "https://res.cloudinary.com/djnv9soqm/image/upload/v1782894657/mwnw7g4vg2ulxfja3rqv.png",
+    "status": "SUCCESS"
+  },
+  {
+    "table": "menu_items",
+    "column": "image_url",
+    "recordId": "2254cbc8-c620-431e-942b-c8e31e43ebac",
+    "oldUrl": "https://cxbsldaoodddbqbfjqch.supabase.co/storage/v1/object/public/menu-images/9bf6a1c3-f2e4-41e8-9d0c-df7b4deead0b/1776851536357-wqedqa59b7o.png",
+    "newUrl": "https://res.cloudinary.com/djnv9soqm/image/upload/v1782894658/txyry60v4xydtkeigytw.png",
+    "status": "SUCCESS"
+  },
+  {
+    "table": "menu_items",
+    "column": "image_url",
+    "recordId": "ec39f5be-05c6-456b-b530-3a48a03bb943",
+    "oldUrl": "https://cxbsldaoodddbqbfjqch.supabase.co/storage/v1/object/public/menu-images/9bf6a1c3-f2e4-41e8-9d0c-df7b4deead0b/1776851584217-unpdzj8saph.png",
+    "newUrl": "https://res.cloudinary.com/djnv9soqm/image/upload/v1782894659/vflycztuok9clh25phkd.png",
+    "status": "SUCCESS"
+  },
+  {
+    "table": "menu_items",
+    "column": "image_url",
+    "recordId": "9282391a-73d7-4045-9f15-740ce633d863",
+    "oldUrl": "https://cxbsldaoodddbqbfjqch.supabase.co/storage/v1/object/public/menu-images/9bf6a1c3-f2e4-41e8-9d0c-df7b4deead0b/1776851726282-jad0zjl1td.png",
+    "newUrl": "https://res.cloudinary.com/djnv9soqm/image/upload/v1782894660/jobtfaz27bbanesv7udk.png",
+    "status": "SUCCESS"
+  },
+  {
+    "table": "menu_items",
+    "column": "image_url",
+    "recordId": "1bd2433e-cead-407b-8783-2c12e6fa5223",
+    "oldUrl": "https://cxbsldaoodddbqbfjqch.supabase.co/storage/v1/object/public/menu-images/9bf6a1c3-f2e4-41e8-9d0c-df7b4deead0b/1776852119171-can3yc4iz6c.png",
+    "newUrl": "https://res.cloudinary.com/djnv9soqm/image/upload/v1782894662/pf56iirdqx4tpzsb5ceo.png",
+    "status": "SUCCESS"
+  },
+  {
+    "table": "menu_items",
+    "column": "image_url",
+    "recordId": "d9f42804-7a50-4814-b7be-c3d0d7269d8f",
+    "oldUrl": "https://cxbsldaoodddbqbfjqch.supabase.co/storage/v1/object/public/menu-images/9bf6a1c3-f2e4-41e8-9d0c-df7b4deead0b/1776852166522-n44lik4m5bq.png",
+    "newUrl": "https://res.cloudinary.com/djnv9soqm/image/upload/v1782894663/wwzfhnarfh5gnpfzjtqw.png",
+    "status": "SUCCESS"
+  },
+  {
+    "table": "menu_items",
+    "column": "image_url",
+    "recordId": "42e1e861-a884-48ca-aeab-ffbb499f6b56",
+    "oldUrl": "https://cxbsldaoodddbqbfjqch.supabase.co/storage/v1/object/public/menu-images/9bf6a1c3-f2e4-41e8-9d0c-df7b4deead0b/1776852335102-bfjoe8xqtal.png",
+    "newUrl": "https://res.cloudinary.com/djnv9soqm/image/upload/v1782894664/ezhb7aw8gmdcw0qkbjhw.png",
+    "status": "SUCCESS"
+  },
+  {
+    "table": "menu_items",
+    "column": "image_url",
+    "recordId": "03ed7a74-1351-4df8-a5e0-3ca7a643fb7f",
+    "oldUrl": "https://cxbsldaoodddbqbfjqch.supabase.co/storage/v1/object/public/menu-images/9bf6a1c3-f2e4-41e8-9d0c-df7b4deead0b/1776852369213-xxhk8ac5iv.png",
+    "newUrl": "https://res.cloudinary.com/djnv9soqm/image/upload/v1782894666/ipolrddtmixuplvxwaxh.png",
+    "status": "SUCCESS"
+  },
+  {
+    "table": "menu_items",
+    "column": "image_url",
+    "recordId": "1de3d264-72b2-4145-a02d-a3ca5c780946",
+    "oldUrl": "https://cxbsldaoodddbqbfjqch.supabase.co/storage/v1/object/public/menu-images/9bf6a1c3-f2e4-41e8-9d0c-df7b4deead0b/1776852401065-0dztj12msafm.png",
+    "newUrl": "https://res.cloudinary.com/djnv9soqm/image/upload/v1782894667/hj2qiek4rjfodcz8ehum.png",
+    "status": "SUCCESS"
+  },
+  {
+    "table": "menu_items",
+    "column": "image_url",
+    "recordId": "b3b3795c-c0e9-4ce3-bb3e-6a7aa460317e",
+    "oldUrl": "https://cxbsldaoodddbqbfjqch.supabase.co/storage/v1/object/public/menu-images/9bf6a1c3-f2e4-41e8-9d0c-df7b4deead0b/1776852487284-xdk23lzdobc.png",
+    "newUrl": "https://res.cloudinary.com/djnv9soqm/image/upload/v1782894668/kkcvywepi9ykafxlaivx.png",
+    "status": "SUCCESS"
+  },
+  {
+    "table": "menu_items",
+    "column": "image_url",
+    "recordId": "ee7719e0-f980-42f3-8ebd-61ca723dd960",
+    "oldUrl": "https://cxbsldaoodddbqbfjqch.supabase.co/storage/v1/object/public/menu-images/9bf6a1c3-f2e4-41e8-9d0c-df7b4deead0b/1776852592374-t5g7z8qbdp.png",
+    "newUrl": "https://res.cloudinary.com/djnv9soqm/image/upload/v1782894669/ejj9ceiwa4mxsqojucvv.png",
+    "status": "SUCCESS"
+  },
+  {
+    "table": "menu_items",
+    "column": "image_url",
+    "recordId": "8699e3d4-c7a5-47c5-ab6d-f45b546c1bb4",
+    "oldUrl": "https://cxbsldaoodddbqbfjqch.supabase.co/storage/v1/object/public/menu-images/9bf6a1c3-f2e4-41e8-9d0c-df7b4deead0b/1776852774639-ugf3ur84en.png",
+    "newUrl": "https://res.cloudinary.com/djnv9soqm/image/upload/v1782894671/zl3ibsxktuo6rh4hw66u.png",
+    "status": "SUCCESS"
+  },
+  {
+    "table": "menu_items",
+    "column": "image_url",
+    "recordId": "5d89e776-91bb-4856-b877-58267677b377",
+    "oldUrl": "https://cxbsldaoodddbqbfjqch.supabase.co/storage/v1/object/public/menu-images/9bf6a1c3-f2e4-41e8-9d0c-df7b4deead0b/1776852820580-ehdrlgoil1g.png",
+    "newUrl": "https://res.cloudinary.com/djnv9soqm/image/upload/v1782894672/tc8n50a1nhdh575hh6zu.png",
+    "status": "SUCCESS"
+  },
+  {
+    "table": "menu_items",
+    "column": "image_url",
+    "recordId": "64ec202f-acab-4bf5-a672-afc9baa8ec5d",
+    "oldUrl": "https://cxbsldaoodddbqbfjqch.supabase.co/storage/v1/object/public/menu-images/9bf6a1c3-f2e4-41e8-9d0c-df7b4deead0b/1776852856807-241j1wnoc0q.png",
+    "newUrl": "https://res.cloudinary.com/djnv9soqm/image/upload/v1782894673/blp5rjoa3baykwz7afn2.png",
+    "status": "SUCCESS"
+  },
+  {
+    "table": "menu_items",
+    "column": "image_url",
+    "recordId": "fd8cd6e3-c035-4faf-9710-06b3a160655d",
+    "oldUrl": "https://cxbsldaoodddbqbfjqch.supabase.co/storage/v1/object/public/menu-images/9bf6a1c3-f2e4-41e8-9d0c-df7b4deead0b/1776852884843-h4kcns6ymnu.png",
+    "newUrl": "https://res.cloudinary.com/djnv9soqm/image/upload/v1782894674/kgkt31yctqkpnap9n6mr.png",
+    "status": "SUCCESS"
+  },
+  {
+    "table": "menu_items",
+    "column": "image_url",
+    "recordId": "bd460524-bfea-470c-b3a8-24a08fd3d3bc",
+    "oldUrl": "https://cxbsldaoodddbqbfjqch.supabase.co/storage/v1/object/public/menu-images/9bf6a1c3-f2e4-41e8-9d0c-df7b4deead0b/1776852930597-qrb3ub4cak.png",
+    "newUrl": "https://res.cloudinary.com/djnv9soqm/image/upload/v1782894676/zef6n7hlgrnbu71jdsou.png",
+    "status": "SUCCESS"
+  },
+  {
+    "table": "menu_items",
+    "column": "image_url",
+    "recordId": "ecb12c99-1522-4097-a4d1-b399462d65f1",
+    "oldUrl": "https://res.cloudinary.com/djnv9soqm/image/upload/v1782894344/tsbkrojonxurdk5hyszy.png",
+    "newUrl": "https://res.cloudinary.com/djnv9soqm/image/upload/v1782894344/tsbkrojonxurdk5hyszy.png",
+    "status": "SKIPPED"
+  },
+  {
+    "table": "gallery",
+    "column": "media_url",
+    "recordId": "ca61def5-c010-4aa4-a95f-053ec078ccb8",
+    "oldUrl": "https://cxbsldaoodddbqbfjqch.supabase.co/storage/v1/object/public/gallery-media/9bf6a1c3-f2e4-41e8-9d0c-df7b4deead0b/1779615775971-3ethyzlids9.JPG",
+    "newUrl": "https://res.cloudinary.com/djnv9soqm/image/upload/v1782894677/qtehcfoifxbywnxeydkq.jpg",
+    "status": "SUCCESS"
+  },
+  {
+    "table": "gallery",
+    "column": "media_url",
+    "recordId": "518c660d-142a-498b-a981-a8539bee99d3",
+    "oldUrl": "https://cxbsldaoodddbqbfjqch.supabase.co/storage/v1/object/public/gallery-media/9bf6a1c3-f2e4-41e8-9d0c-df7b4deead0b/1779615787328-xzkwp1mulkb.JPG",
+    "newUrl": "https://res.cloudinary.com/djnv9soqm/image/upload/v1782894679/jbbjrfhqz5ae2ezl0cxb.jpg",
+    "status": "SUCCESS"
+  },
+  {
+    "table": "gallery",
+    "column": "media_url",
+    "recordId": "faac1885-f182-4ee1-8190-fc0df5b65267",
+    "oldUrl": "https://cxbsldaoodddbqbfjqch.supabase.co/storage/v1/object/public/gallery-media/9bf6a1c3-f2e4-41e8-9d0c-df7b4deead0b/1779615799623-3mg9fo0sqpi.JPG",
+    "newUrl": "https://res.cloudinary.com/djnv9soqm/image/upload/v1782894680/l2qvrrmctin3aoafcrfq.jpg",
+    "status": "SUCCESS"
+  },
+  {
+    "table": "gallery",
+    "column": "media_url",
+    "recordId": "a4381bf4-d168-497c-804f-0da2b3804795",
+    "oldUrl": "https://cxbsldaoodddbqbfjqch.supabase.co/storage/v1/object/public/gallery-media/9bf6a1c3-f2e4-41e8-9d0c-df7b4deead0b/1779616224573-i32fjypu2s.JPG",
+    "newUrl": "https://res.cloudinary.com/djnv9soqm/image/upload/v1782894682/wjuzsdrwyjl6ljli1ofv.jpg",
+    "status": "SUCCESS"
+  },
+  {
+    "table": "gallery",
+    "column": "media_url",
+    "recordId": "13b5c237-f1c4-44a1-a067-3c40a9e64e60",
+    "oldUrl": "https://cxbsldaoodddbqbfjqch.supabase.co/storage/v1/object/public/gallery-media/9bf6a1c3-f2e4-41e8-9d0c-df7b4deead0b/1779616239524-24e44sf78nmj.JPG",
+    "newUrl": "https://res.cloudinary.com/djnv9soqm/image/upload/v1782894683/xxa1hzua0mji4j4hg64i.jpg",
+    "status": "SUCCESS"
+  },
+  {
+    "table": "gallery",
+    "column": "media_url",
+    "recordId": "111181ee-2e45-49f8-ac9a-cf44f6ade3d8",
+    "oldUrl": "https://cxbsldaoodddbqbfjqch.supabase.co/storage/v1/object/public/gallery-media/9bf6a1c3-f2e4-41e8-9d0c-df7b4deead0b/1779616249674-z1e2xcsz38.JPG",
+    "newUrl": "https://res.cloudinary.com/djnv9soqm/image/upload/v1782894685/b9fbkrhyt4l6q26kqbfi.jpg",
+    "status": "SUCCESS"
+  },
+  {
+    "table": "locations",
+    "column": "cover_image",
+    "recordId": "d8ab8c1c-4449-4eaf-9533-9fba454d6c0d",
+    "oldUrl": "https://cxbsldaoodddbqbfjqch.supabase.co/storage/v1/object/public/gallery-media/locations/d8ab8c1c-4449-4eaf-9533-9fba454d6c0d/1782882187592-yqstfy2juf.jpeg",
+    "newUrl": "https://res.cloudinary.com/djnv9soqm/image/upload/v1782894686/lozw2cvq3htt1lwbtchq.jpg",
+    "status": "SUCCESS"
+  },
+  {
+    "table": "locations",
+    "column": "cover_image",
+    "recordId": "ed7b14eb-329d-48d2-80e8-d79db829f146",
+    "oldUrl": "https://cxbsldaoodddbqbfjqch.supabase.co/storage/v1/object/public/gallery-media/locations/new/1775205809088-vu2jo8g38bb.JPG",
+    "newUrl": "https://res.cloudinary.com/djnv9soqm/image/upload/v1782894688/yhuwcgkj3gfnijw5a3r4.jpg",
+    "status": "SUCCESS"
+  },
+  {
+    "table": "locations",
+    "column": "cover_image",
+    "recordId": "2cd2490d-8fab-43c6-8bf7-c3b74e1ec14b",
+    "oldUrl": "https://cxbsldaoodddbqbfjqch.supabase.co/storage/v1/object/public/gallery-media/locations/new/1779342817258-h49s3r1o81c.png",
+    "newUrl": "https://res.cloudinary.com/djnv9soqm/image/upload/v1782894691/ylwvo52lz7l17mpbhatd.png",
+    "status": "SUCCESS"
+  },
+  {
+    "table": "location_gallery",
+    "column": "image_url",
+    "recordId": "953a44fc-031e-438a-9db6-4b0a6bf12d24",
+    "oldUrl": "https://cxbsldaoodddbqbfjqch.supabase.co/storage/v1/object/public/gallery-media/locations/d8ab8c1c-4449-4eaf-9533-9fba454d6c0d/1782882162994-hrggwqgav9n.jpeg",
+    "newUrl": "https://res.cloudinary.com/djnv9soqm/image/upload/v1782894693/eedpwxla5tacij7dw5vw.jpg",
+    "status": "SUCCESS"
+  },
+  {
+    "table": "location_gallery",
+    "column": "image_url",
+    "recordId": "85541a0c-bbd9-4ef8-90b6-1cdf92e4594c",
+    "oldUrl": "https://cxbsldaoodddbqbfjqch.supabase.co/storage/v1/object/public/gallery-media/locations/d8ab8c1c-4449-4eaf-9533-9fba454d6c0d/1782882172363-4072t3l2o9h.jpeg",
+    "newUrl": "https://res.cloudinary.com/djnv9soqm/image/upload/v1782894694/jfk5g1i8zjimq6vd2hun.jpg",
+    "status": "SUCCESS"
+  },
+  {
+    "table": "location_gallery",
+    "column": "image_url",
+    "recordId": "4c003490-829a-4fd8-bef1-f9e1862b573c",
+    "oldUrl": "https://cxbsldaoodddbqbfjqch.supabase.co/storage/v1/object/public/gallery-media/locations/d8ab8c1c-4449-4eaf-9533-9fba454d6c0d/1782882182505-e0bc6ftu6rk.jpeg",
+    "newUrl": "https://res.cloudinary.com/djnv9soqm/image/upload/v1782894696/b9ljv42e7prx9rmwp1xd.jpg",
+    "status": "SUCCESS"
+  },
+  {
+    "table": "location_gallery",
+    "column": "image_url",
+    "recordId": "1f3fa224-f223-4cab-aa16-4ed163624d5a",
+    "oldUrl": "https://cxbsldaoodddbqbfjqch.supabase.co/storage/v1/object/public/gallery-media/locations/d8ab8c1c-4449-4eaf-9533-9fba454d6c0d/1782882201478-ltkvb5wg37p.jpeg",
+    "newUrl": "https://res.cloudinary.com/djnv9soqm/image/upload/v1782894698/q1va7ywtqrcz4int3b5c.jpg",
+    "status": "SUCCESS"
+  },
+  {
+    "table": "location_gallery",
+    "column": "image_url",
+    "recordId": "bd567bd7-4d64-4891-903e-bd702242220a",
+    "oldUrl": "https://cxbsldaoodddbqbfjqch.supabase.co/storage/v1/object/public/gallery-media/locations/new/1775205841962-9nihkorg6yq.png",
+    "newUrl": "https://res.cloudinary.com/djnv9soqm/image/upload/v1782894699/ghgbjkxugt4qsqx6xoif.png",
+    "status": "SUCCESS"
+  },
+  {
+    "table": "location_gallery",
+    "column": "image_url",
+    "recordId": "8aa64813-4a55-4706-bc19-bd359ba7e2f0",
+    "oldUrl": "https://cxbsldaoodddbqbfjqch.supabase.co/storage/v1/object/public/gallery-media/locations/ed7b14eb-329d-48d2-80e8-d79db829f146/1782882354438-stxc71tbzpb.jpg",
+    "newUrl": "https://res.cloudinary.com/djnv9soqm/image/upload/v1782894702/hgqz4dnmrsrhbrsarhpb.jpg",
+    "status": "SUCCESS"
+  },
+  {
+    "table": "location_gallery",
+    "column": "image_url",
+    "recordId": "9156df5d-cac3-4340-abfe-d363d1206dc0",
+    "oldUrl": "https://cxbsldaoodddbqbfjqch.supabase.co/storage/v1/object/public/gallery-media/locations/ed7b14eb-329d-48d2-80e8-d79db829f146/1782882372027-oywerwkyg7.jpg",
+    "newUrl": "https://res.cloudinary.com/djnv9soqm/image/upload/v1782894705/cfxsvyrne5i3po1dlauy.jpg",
+    "status": "SUCCESS"
+  },
+  {
+    "table": "location_gallery",
+    "column": "image_url",
+    "recordId": "e1786e10-8eb4-49f9-ad5f-00e45817e2ee",
+    "oldUrl": "https://cxbsldaoodddbqbfjqch.supabase.co/storage/v1/object/public/gallery-media/locations/ed7b14eb-329d-48d2-80e8-d79db829f146/1782882380429-hn7xl6li74a.jpg",
+    "newUrl": "https://res.cloudinary.com/djnv9soqm/image/upload/v1782894707/ke4rvyohl0crzrjp874u.jpg",
+    "status": "SUCCESS"
+  },
+  {
+    "table": "location_gallery",
+    "column": "image_url",
+    "recordId": "2b171b66-24e8-4122-a856-1c8a1b3c21d1",
+    "oldUrl": "https://cxbsldaoodddbqbfjqch.supabase.co/storage/v1/object/public/gallery-media/locations/ed7b14eb-329d-48d2-80e8-d79db829f146/1782882387882-q4jatu3bnpj.jpg",
+    "newUrl": "",
+    "status": "FAILED",
+    "error": "Cloudinary upload failed: {\"error\":{\"message\":\"File size too large. Got 19006908. Maximum is 10485760.\"}}"
+  },
+  {
+    "table": "location_gallery",
+    "column": "image_url",
+    "recordId": "ef4d9df9-84e0-4674-a65c-2aaeef26965d",
+    "oldUrl": "https://cxbsldaoodddbqbfjqch.supabase.co/storage/v1/object/public/gallery-media/locations/ed7b14eb-329d-48d2-80e8-d79db829f146/1782882393238-t5tovcfe13.jpg",
+    "newUrl": "",
+    "status": "FAILED",
+    "error": "Cloudinary upload failed: {\"error\":{\"message\":\"File size too large. Got 34503507. Maximum is 10485760.\"}}"
+  },
+  {
+    "table": "location_gallery",
+    "column": "image_url",
+    "recordId": "f7f41fb7-60cc-4a65-8e89-1a0e027c3b30",
+    "oldUrl": "https://cxbsldaoodddbqbfjqch.supabase.co/storage/v1/object/public/gallery-media/locations/ed7b14eb-329d-48d2-80e8-d79db829f146/1782882440524-k0n8wnv4jz.jpg",
+    "newUrl": "https://res.cloudinary.com/djnv9soqm/image/upload/v1782894725/q9nufd3pe5wjv9gtvagl.jpg",
+    "status": "SUCCESS"
+  },
+  {
+    "table": "location_gallery",
+    "column": "image_url",
+    "recordId": "07772542-0314-4b62-bb96-cbe0d898d421",
+    "oldUrl": "https://cxbsldaoodddbqbfjqch.supabase.co/storage/v1/object/public/gallery-media/locations/2cd2490d-8fab-43c6-8bf7-c3b74e1ec14b/1782880552302-go2gnhuhibd.JPG",
+    "newUrl": "https://res.cloudinary.com/djnv9soqm/image/upload/v1782894729/vs4wdzcj4tprink07htv.jpg",
+    "status": "SUCCESS"
+  },
+  {
+    "table": "location_gallery",
+    "column": "image_url",
+    "recordId": "1e5cc02f-440b-4445-bc8e-e11b615457dd",
+    "oldUrl": "https://cxbsldaoodddbqbfjqch.supabase.co/storage/v1/object/public/gallery-media/locations/2cd2490d-8fab-43c6-8bf7-c3b74e1ec14b/1782881055562-abn3p0mkyyt.JPG",
+    "newUrl": "",
+    "status": "FAILED",
+    "error": "Cloudinary upload failed: {\"error\":{\"message\":\"File size too large. Got 11239222. Maximum is 10485760.\"}}"
+  },
+  {
+    "table": "location_gallery",
+    "column": "image_url",
+    "recordId": "239682d3-438c-4bc5-9de1-53116dce0033",
+    "oldUrl": "https://cxbsldaoodddbqbfjqch.supabase.co/storage/v1/object/public/gallery-media/locations/2cd2490d-8fab-43c6-8bf7-c3b74e1ec14b/1782881092891-pjo0j6nmgo.JPG",
+    "newUrl": "https://res.cloudinary.com/djnv9soqm/image/upload/v1782894736/a8oq0tvxno0v1umwtecr.jpg",
+    "status": "SUCCESS"
+  },
+  {
+    "table": "location_gallery",
+    "column": "image_url",
+    "recordId": "ab06b241-59b4-4bf6-ad73-0bd3ef261088",
+    "oldUrl": "https://cxbsldaoodddbqbfjqch.supabase.co/storage/v1/object/public/gallery-media/locations/2cd2490d-8fab-43c6-8bf7-c3b74e1ec14b/1782881102974-3pqo8arhiqs.JPG",
+    "newUrl": "",
+    "status": "FAILED",
+    "error": "Cloudinary upload failed: {\"error\":{\"message\":\"File size too large. Got 10721671. Maximum is 10485760.\"}}"
+  },
+  {
+    "table": "location_gallery",
+    "column": "image_url",
+    "recordId": "cfea9f2f-9598-41fe-b8a5-1a2637a056ce",
+    "oldUrl": "https://cxbsldaoodddbqbfjqch.supabase.co/storage/v1/object/public/gallery-media/locations/2cd2490d-8fab-43c6-8bf7-c3b74e1ec14b/1782881118119-scarof6ims.JPG",
+    "newUrl": "",
+    "status": "FAILED",
+    "error": "Cloudinary upload failed: {\"error\":{\"message\":\"File size too large. Got 10844013. Maximum is 10485760.\"}}"
+  },
+  {
+    "table": "location_gallery",
+    "column": "image_url",
+    "recordId": "048bdfa1-37f0-483d-b9bf-8938d8936113",
+    "oldUrl": "https://cxbsldaoodddbqbfjqch.supabase.co/storage/v1/object/public/gallery-media/locations/2cd2490d-8fab-43c6-8bf7-c3b74e1ec14b/1782881218873-8jw019su92m.JPG",
+    "newUrl": "https://res.cloudinary.com/djnv9soqm/image/upload/v1782894748/gbj2et1v8wwwhaqplmm9.jpg",
+    "status": "SUCCESS"
+  },
+  {
+    "table": "site_content",
+    "column": "value",
+    "recordId": "home_hero",
+    "oldUrl": "https://cxbsldaoodddbqbfjqch.supabase.co/storage/v1/object/public/hero-media/hero/videos/1782028700333-website_cafe_loop__1_.mp4",
+    "newUrl": "https://res.cloudinary.com/djnv9soqm/video/upload/v1782894759/zqsnlfqdaunse513nv5x.mp4",
+    "status": "SUCCESS"
+  },
+  {
+    "table": "site_content",
+    "column": "value",
+    "recordId": "get_to_know_us",
+    "oldUrl": "https://cxbsldaoodddbqbfjqch.supabase.co/storage/v1/object/public/hero-media/cms/get-to-know-us/founders/images/1779680916109-IMG_4690.JPG",
+    "newUrl": "https://res.cloudinary.com/djnv9soqm/image/upload/v1782894762/upgwwixwfausviwvbrya.jpg",
+    "status": "SUCCESS"
+  },
+  {
+    "table": "site_content",
+    "column": "value",
+    "recordId": "get_to_know_us",
+    "oldUrl": "https://cxbsldaoodddbqbfjqch.supabase.co/storage/v1/object/public/hero-media/cms/get-to-know-us/backgrounds/1779680271839-snapsave-app_3822862257568106134.mp4",
+    "newUrl": "https://res.cloudinary.com/djnv9soqm/video/upload/v1782894763/y7uvma2sg8gsvnwvfgeg.mp4",
+    "status": "SUCCESS"
+  },
+  {
+    "table": "site_content",
+    "column": "value",
+    "recordId": "get_to_know_us",
+    "oldUrl": "https://cxbsldaoodddbqbfjqch.supabase.co/storage/v1/object/public/hero-media/cms/get-to-know-us/backgrounds/images/1779680897423-IMG_4692.JPG",
+    "newUrl": "https://res.cloudinary.com/djnv9soqm/image/upload/v1782894765/hpbjgdoivutb9ffnjli7.jpg",
+    "status": "SUCCESS"
+  },
+  {
+    "table": "site_content",
+    "column": "value",
+    "recordId": "our_story",
+    "oldUrl": "https://cxbsldaoodddbqbfjqch.supabase.co/storage/v1/object/public/hero-media/our_story/1779678968057-IMG_4693.JPG",
+    "newUrl": "https://res.cloudinary.com/djnv9soqm/image/upload/v1782894767/rcxbutlfvzcv4ddg0qoa.jpg",
+    "status": "SUCCESS"
+  },
+  {
+    "table": "site_content",
+    "column": "value",
+    "recordId": "our_story",
+    "oldUrl": "https://cxbsldaoodddbqbfjqch.supabase.co/storage/v1/object/public/hero-media/our_story/1779678770258-IMG_4694.JPG",
+    "newUrl": "https://res.cloudinary.com/djnv9soqm/image/upload/v1782894768/tkofdiageqsvz0bz86ye.jpg",
+    "status": "SUCCESS"
+  }
+]

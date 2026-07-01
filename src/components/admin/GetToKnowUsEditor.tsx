@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { GetToKnowUsContent, PhilosophyCard } from '../../types/getToKnowUs';
 import { useGetToKnowUs } from '../../hooks/useGetToKnowUs';
-import MediaUploader from './MediaUploader';
+import UniversalUploader from './UniversalUploader';
 import { Save, Plus, Trash2, ArrowUp, ArrowDown } from 'lucide-react';
 import toast from 'react-hot-toast';
 
@@ -199,12 +199,22 @@ export default function GetToKnowUsEditor({ initialContent, onRefresh }: GetToKn
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8 border-t border-[#3a3a3a] pt-8">
             <div>
               <label className="block text-sm font-medium text-gray-400 mb-2">Left Image</label>
-              <MediaUploader
-                currentMedia={content.founders.imageLeft}
-                onUploadSuccess={(asset) => updateSection('founders', 'imageLeft', asset)}
-                onRemove={() => updateSection('founders', 'imageLeft', null)}
-                folder="cms/get-to-know-us/founders"
+              <UniversalUploader
                 label="Left Founder Image"
+                value={content.founders.imageLeft?.url}
+                onChange={(url) => {
+                  const urlStr = url as string;
+                  if (urlStr) {
+                    updateSection('founders', 'imageLeft', {
+                      url: urlStr,
+                      type: urlStr.match(/\.(mp4|webm|mov)$/i) ? 'video' : 'image',
+                      mimeType: urlStr.match(/\.(mp4|webm|mov)$/i) ? 'video/mp4' : 'image/jpeg'
+                    });
+                  } else {
+                    updateSection('founders', 'imageLeft', null);
+                  }
+                }}
+                folder="cms/get-to-know-us/founders"
               />
               <div className="mt-4">
                 <label className="block text-sm font-medium text-gray-400 mb-2">Image Shape</label>
@@ -222,12 +232,22 @@ export default function GetToKnowUsEditor({ initialContent, onRefresh }: GetToKn
 
             <div>
               <label className="block text-sm font-medium text-gray-400 mb-2">Right Image</label>
-              <MediaUploader
-                currentMedia={content.founders.imageRight}
-                onUploadSuccess={(asset) => updateSection('founders', 'imageRight', asset)}
-                onRemove={() => updateSection('founders', 'imageRight', null)}
-                folder="cms/get-to-know-us/founders"
+              <UniversalUploader
                 label="Right Founder Image"
+                value={content.founders.imageRight?.url}
+                onChange={(url) => {
+                  const urlStr = url as string;
+                  if (urlStr) {
+                    updateSection('founders', 'imageRight', {
+                      url: urlStr,
+                      type: urlStr.match(/\.(mp4|webm|mov)$/i) ? 'video' : 'image',
+                      mimeType: urlStr.match(/\.(mp4|webm|mov)$/i) ? 'video/mp4' : 'image/jpeg'
+                    });
+                  } else {
+                    updateSection('founders', 'imageRight', null);
+                  }
+                }}
+                folder="cms/get-to-know-us/founders"
               />
               <div className="mt-4">
                 <label className="block text-sm font-medium text-gray-400 mb-2">Image Shape</label>
@@ -247,12 +267,22 @@ export default function GetToKnowUsEditor({ initialContent, onRefresh }: GetToKn
           <div className="grid grid-cols-1 gap-6 border-t border-[#3a3a3a] pt-8">
             <div>
               <label className="block text-sm font-medium text-gray-400 mb-2">Background Image</label>
-              <MediaUploader
-                currentMedia={content.founders.backgroundMedia}
-                onUploadSuccess={(asset) => updateSection('founders', 'backgroundMedia', asset)}
-                onRemove={() => updateSection('founders', 'backgroundMedia', null)}
-                folder="cms/get-to-know-us/backgrounds"
+              <UniversalUploader
                 label="Section Background"
+                value={content.founders.backgroundMedia?.url}
+                onChange={(url) => {
+                  const urlStr = url as string;
+                  if (urlStr) {
+                    updateSection('founders', 'backgroundMedia', {
+                      url: urlStr,
+                      type: urlStr.match(/\.(mp4|webm|mov)$/i) ? 'video' : 'image',
+                      mimeType: urlStr.match(/\.(mp4|webm|mov)$/i) ? 'video/mp4' : 'image/jpeg'
+                    });
+                  } else {
+                    updateSection('founders', 'backgroundMedia', null);
+                  }
+                }}
+                folder="cms/get-to-know-us/backgrounds"
               />
             </div>
           </div>

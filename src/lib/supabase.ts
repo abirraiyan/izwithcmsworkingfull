@@ -32,13 +32,8 @@ export const supabase = createClient(
   }
 );
 
-export const getImageUrl = (path: string, bucket = "menu-images") => {
-  if (!path) return "/placeholder.jpg";
-
-  if (path.startsWith("http")) return path;
-
-  return `${import.meta.env.VITE_SUPABASE_URL}/storage/v1/object/public/${bucket}/${path}`;
-};
+import { getImageUrl } from './image';
+export { getImageUrl };
 
 // Auth Helper
 export const getSession = async () => {
@@ -365,53 +360,7 @@ export const deleteMenuItem = async (id: string) => {
   if (error) throw error;
 };
 
-export const uploadImage = async (file: File) => {
-  const session = await getSession();
-  if (!session) throw new Error('No active session found. Please log in.');
 
-  const fileExt = file.name.split('.').pop();
-  const fileName = `${Date.now()}-${Math.random().toString(36).substring(2)}.${fileExt}`;
-  
-  const userId = session.user.id;
-  console.log('Starting upload to menu-images for user:', userId);
-  const paths = [
-    `${userId}/${fileName}`,
-    `public/${fileName}`,
-    fileName
-  ];
-
-  let lastError = null;
-
-  for (const filePath of paths) {
-    try {
-      console.log(`Attempting upload to menu-images: ${filePath}`);
-      const { data: uploadData, error: uploadError } = await supabase.storage
-        .from('menu-images')
-        .upload(filePath, file, {
-          cacheControl: '3600',
-          upsert: false,
-          contentType: file.type
-        });
-
-      if (uploadError) {
-        console.warn(`Upload to ${filePath} failed:`, uploadError.message);
-        lastError = uploadError;
-        continue;
-      }
-
-      if (uploadData) {
-        const { data: { publicUrl } } = supabase.storage
-          .from('menu-images')
-          .getPublicUrl(filePath);
-        return publicUrl;
-      }
-    } catch (err) {
-      lastError = err;
-    }
-  }
-
-  throw new Error(`All upload attempts failed: ${lastError?.message || 'Unknown error'}`);
-};
 
 export const getGalleryItems = async () => {
   const { data, error } = await supabase
@@ -461,53 +410,7 @@ export const deleteGalleryItem = async (id: string) => {
   if (error) throw error;
 };
 
-export const uploadGalleryMedia = async (file: File) => {
-  const session = await getSession();
-  if (!session) throw new Error('No active session found. Please log in.');
 
-  const fileExt = file.name.split('.').pop();
-  const fileName = `${Date.now()}-${Math.random().toString(36).substring(2)}.${fileExt}`;
-  
-  const userId = session.user.id;
-  console.log('Starting upload to gallery-media for user:', userId);
-  const paths = [
-    `${userId}/${fileName}`,
-    `public/${fileName}`,
-    fileName
-  ];
-
-  let lastError = null;
-
-  for (const filePath of paths) {
-    try {
-      console.log(`Attempting upload to gallery-media: ${filePath}`);
-      const { data: uploadData, error: uploadError } = await supabase.storage
-        .from('gallery-media')
-        .upload(filePath, file, {
-          cacheControl: '3600',
-          upsert: false,
-          contentType: file.type
-        });
-
-      if (uploadError) {
-        console.warn(`Gallery upload to ${filePath} failed:`, uploadError.message);
-        lastError = uploadError;
-        continue;
-      }
-
-      if (uploadData) {
-        const { data: { publicUrl } } = supabase.storage
-          .from('gallery-media')
-          .getPublicUrl(filePath);
-        return publicUrl;
-      }
-    } catch (err) {
-      lastError = err;
-    }
-  }
-
-  throw new Error(`Gallery upload failed: ${lastError?.message || 'Unknown error'}`);
-};
 
 // Locations Management
 export const getLocations = async () => {
@@ -631,83 +534,7 @@ export const deleteLocation = async (id: string) => {
   clearLocationsCache();
 };
 
-export const uploadLocationMedia = async (file: File, locationId: string = 'temp') => {
-  const session = await getSession();
-  if (!session) throw new Error('No active session found. Please log in.');
 
-  const fileExt = file.name.split('.').pop();
-  const fileName = `${Date.now()}-${Math.random().toString(36).substring(2)}.${fileExt}`;
-  
-  // Custom path as requested: locations/{locationId}/{filename}
-  const filePath = `locations/${locationId}/${fileName}`;
-
-  const { data: uploadData, error: uploadError } = await supabase.storage
-    .from('gallery-media')
-    .upload(filePath, file, {
-      cacheControl: '3600',
-      upsert: false,
-      contentType: file.type
-    });
-
-  if (uploadError) throw uploadError;
-
-  const { data: { publicUrl } } = supabase.storage
-    .from('gallery-media')
-    .getPublicUrl(filePath);
-    
-  return publicUrl;
-};
-
-export const uploadHeroMedia = async (file: File, folder: string = 'hero') => {
-  const session = await getSession();
-  if (!session) throw new Error('No active session found. Please log in.');
-
-  const BUCKET = 'hero-media';
-  // Use user's requested filename format
-  const fileName = `${Date.now()}-${file.name}`;
-  const filePath = `${folder}/${fileName}`;
-
-  console.log(`Attempting upload to ${BUCKET}: ${filePath}`);
-  const { data: uploadData, error: uploadError } = await supabase.storage
-    .from(BUCKET)
-    .upload(filePath, file, {
-      upsert: true,
-    });
-
-  if (uploadError) throw uploadError;
-
-  const { data: { publicUrl } } = supabase.storage.from(BUCKET).getPublicUrl(filePath);
-  return publicUrl;
-};
-
-export const uploadMedia = async (file: File, baseFolder: string = 'media') => {
-  const session = await getSession();
-  if (!session) throw new Error('No active session found. Please log in.');
-
-  const BUCKET = 'hero-media'; // Reusing existing bucket as requested
-  const isImage = file.type.startsWith('image/');
-  const typeFolder = isImage ? 'images' : 'videos';
-  
-  // Clean up folder path
-  let folder = baseFolder;
-  if (folder.endsWith('/')) folder = folder.slice(0, -1);
-  
-  const fileName = `${Date.now()}-${file.name.replace(/[^a-zA-Z0-9.-]/g, '_')}`;
-  const filePath = `${folder}/${typeFolder}/${fileName}`;
-
-  console.log(`Attempting upload to ${BUCKET}: ${filePath}`);
-  const { data: uploadData, error: uploadError } = await supabase.storage
-    .from(BUCKET)
-    .upload(filePath, file, {
-      upsert: true,
-      cacheControl: '3600',
-    });
-
-  if (uploadError) throw uploadError;
-
-  const { data: { publicUrl } } = supabase.storage.from(BUCKET).getPublicUrl(filePath);
-  return publicUrl;
-};
 
 // Testimonials Management
 export const getTestimonials = async (onlyFeatured: boolean = false, limit: number = 3) => {
