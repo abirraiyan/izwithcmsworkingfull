@@ -53,7 +53,7 @@ export default function Footer() {
           {/* Social & Delivery Links */}
           <div className="flex flex-wrap justify-center md:justify-end gap-6 md:gap-8">
             <a
-              href="https://instagram.com"
+              href="https://www.instagram.com/izpatisserieandcafe/"
               target="_blank"
               rel="noopener noreferrer"
               className="text-cream/60 hover:text-gold transition-all duration-300 text-[11px] tracking-[0.3em] uppercase font-bold"
@@ -61,7 +61,7 @@ export default function Footer() {
               Instagram
             </a>
             <a
-              href="https://facebook.com"
+              href="https://www.facebook.com/IZPatisserieandCafe"
               target="_blank"
               rel="noopener noreferrer"
               className="text-cream/60 hover:text-gold transition-all duration-300 text-[11px] tracking-[0.3em] uppercase font-bold"

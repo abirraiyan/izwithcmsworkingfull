@@ -333,7 +333,7 @@ function ContactContent() {
           
           <div className="flex gap-6 justify-center pt-4">
             <a
-              href="https://instagram.com"
+              href="https://www.instagram.com/izpatisserieandcafe/"
               target="_blank"
               rel="noopener noreferrer"
               className="w-14 h-14 bg-white border border-[#c6a75e]/20 text-[#c6a75e] hover:bg-[#c6a75e] hover:text-cream rounded-full flex items-center justify-center shadow-soft hover:shadow-md hover:-translate-y-1 transition-all duration-300"
@@ -342,7 +342,7 @@ function ContactContent() {
               <Instagram size={22} strokeWidth={1.5} />
             </a>
             <a
-              href="https://facebook.com"
+              href="https://www.facebook.com/IZPatisserieandCafe"
               target="_blank"
               rel="noopener noreferrer"
               className="w-14 h-14 bg-white border border-[#c6a75e]/20 text-[#c6a75e] hover:bg-[#c6a75e] hover:text-cream rounded-full flex items-center justify-center shadow-soft hover:shadow-md hover:-translate-y-1 transition-all duration-300"

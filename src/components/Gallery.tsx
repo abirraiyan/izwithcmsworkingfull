@@ -50,12 +50,12 @@ export default function Gallery() {
               View Full Gallery
             </Link>
             <a
-              href="https://instagram.com"
+              href="https://www.instagram.com/izpatisserieandcafe/"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-block px-8 py-4 bg-transparent border border-cream/30 text-cream text-sm font-semibold tracking-widest uppercase rounded-full hover:bg-cream hover:text-charcoal transition-colors duration-300"
             >
-              Follow @izpatisserie
+              Follow @izpatisserieandcafe
             </a>
           </div>
         </motion.div>
