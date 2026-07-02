@@ -49,15 +49,31 @@ export const updateNavigationSettings = async (items: NavigationItem[]) => {
     order: index
   }));
 
-  const { error } = await supabase
+  const { data: existing } = await supabase
     .from('site_content')
-    .upsert({
-      key: 'navigation_settings',
-      value: orderedItems,
-      updated_at: new Date().toISOString()
-    }, {
-      onConflict: 'key'
-    });
+    .select('key')
+    .eq('key', 'navigation_settings')
+    .maybeSingle();
+
+  const payloadData = {
+    key: 'navigation_settings',
+    value: orderedItems,
+    updated_at: new Date().toISOString()
+  };
+
+  let error;
+  if (existing) {
+    const { error: err } = await supabase
+      .from('site_content')
+      .update(payloadData)
+      .eq('key', 'navigation_settings');
+    error = err;
+  } else {
+    const { error: err } = await supabase
+      .from('site_content')
+      .insert([payloadData]);
+    error = err;
+  }
 
   if (error) throw error;
 };

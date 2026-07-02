@@ -26,15 +26,31 @@ export const updateOurStoryContent = async (payload: OurStoryContent) => {
   const { data: { session } } = await supabase.auth.getSession();
   if (!session) throw new Error('Unauthorized');
 
-  const { error } = await supabase
+  const { data: existing } = await supabase
     .from('site_content')
-    .upsert({
-      key: 'our_story',
-      value: payload,
-      updated_at: new Date().toISOString()
-    }, {
-      onConflict: 'key'
-    });
+    .select('key')
+    .eq('key', 'our_story')
+    .maybeSingle();
+
+  const payloadData = {
+    key: 'our_story',
+    value: payload,
+    updated_at: new Date().toISOString()
+  };
+
+  let error;
+  if (existing) {
+    const { error: err } = await supabase
+      .from('site_content')
+      .update(payloadData)
+      .eq('key', 'our_story');
+    error = err;
+  } else {
+    const { error: err } = await supabase
+      .from('site_content')
+      .insert([payloadData]);
+    error = err;
+  }
 
   if (error) throw error;
 };

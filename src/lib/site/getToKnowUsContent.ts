@@ -70,16 +70,34 @@ export async function getGetToKnowUsContent(): Promise<GetToKnowUsContent> {
 }
 
 export async function updateGetToKnowUsContent(content: GetToKnowUsContent): Promise<void> {
-  const { error } = await supabase
+  const { data: { session } } = await supabase.auth.getSession();
+  if (!session) throw new Error('Unauthorized');
+
+  const { data: existing } = await supabase
     .from('site_content')
-    .upsert(
-      {
-        key: GET_TO_KNOW_US_KEY,
-        value: content,
-        updated_at: new Date().toISOString()
-      },
-      { onConflict: 'key' }
-    );
+    .select('key')
+    .eq('key', GET_TO_KNOW_US_KEY)
+    .maybeSingle();
+
+  const payloadData = {
+    key: GET_TO_KNOW_US_KEY,
+    value: content,
+    updated_at: new Date().toISOString()
+  };
+
+  let error;
+  if (existing) {
+    const { error: err } = await supabase
+      .from('site_content')
+      .update(payloadData)
+      .eq('key', GET_TO_KNOW_US_KEY);
+    error = err;
+  } else {
+    const { error: err } = await supabase
+      .from('site_content')
+      .insert([payloadData]);
+    error = err;
+  }
 
   if (error) {
     console.error('Error updating Get To Know Us content:', error);

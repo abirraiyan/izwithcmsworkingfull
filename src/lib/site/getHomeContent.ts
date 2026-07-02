@@ -37,24 +37,40 @@ export const updateHomeContent = async (payload: Partial<SiteContent>) => {
   const { data: { session } } = await supabase.auth.getSession();
   if (!session) throw new Error('Unauthorized');
 
-  const { error } = await supabase
+  const { data: existing } = await supabase
     .from('site_content')
-    .upsert({
-      key: 'home_hero',
-      value: {
-        enabled: payload.hero_enabled === 'true',
-        video_url: payload.hero_video_url,
-        poster_url: payload.hero_poster_url,
-        badge_text: payload.hero_badge,
-        title_line_1: payload.hero_title_line_1,
-        title_line_2: payload.hero_title_line_2,
-        cta_text: payload.hero_cta_text,
-        cta_link: payload.hero_cta_link
-      },
-      updated_at: new Date().toISOString()
-    }, {
-      onConflict: 'key'
-    });
+    .select('key')
+    .eq('key', 'home_hero')
+    .maybeSingle();
+
+  const payloadData = {
+    key: 'home_hero',
+    value: {
+      enabled: payload.hero_enabled === 'true',
+      video_url: payload.hero_video_url,
+      poster_url: payload.hero_poster_url,
+      badge_text: payload.hero_badge,
+      title_line_1: payload.hero_title_line_1,
+      title_line_2: payload.hero_title_line_2,
+      cta_text: payload.hero_cta_text,
+      cta_link: payload.hero_cta_link
+    },
+    updated_at: new Date().toISOString()
+  };
+
+  let error;
+  if (existing) {
+    const { error: err } = await supabase
+      .from('site_content')
+      .update(payloadData)
+      .eq('key', 'home_hero');
+    error = err;
+  } else {
+    const { error: err } = await supabase
+      .from('site_content')
+      .insert([payloadData]);
+    error = err;
+  }
 
   if (error) throw error;
 };
