@@ -6,7 +6,7 @@ const isDevelopment = import.meta.env.DEV;
 const isBrowser = typeof window !== 'undefined';
 const supabaseUrl = (isBrowser && isDevelopment)
   ? `${window.location.origin}/supabase-proxy`
-  : (import.meta.env.VITE_SUPABASE_URL || 'https://cxbsldaoodddbqbfjqch.supabase.co');
+  : (import.meta.env.VITE_SUPABASE_URL || 'https://uwjojsjpfnkdsivciamv.supabase.co');
 const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY;
 
 // Deployment Debugging (Masked for Security)

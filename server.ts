@@ -15,7 +15,7 @@ const PORT = 3000;
 // 1. Supabase Proxy FIRST (before body parsers like express.json())
 // This ensures that the request body stream is NOT consumed before proxying.
 app.use('/supabase-proxy', createProxyMiddleware({
-  target: 'https://cxbsldaoodddbqbfjqch.supabase.co',
+  target: 'https://uwjojsjpfnkdsivciamv.supabase.co',
   changeOrigin: true,
   pathRewrite: {
     '^/supabase-proxy': '',
