@@ -104,27 +104,41 @@ function OurStoryContent() {
   // Helper to disable animations on mobile
   const anim = (props: any) => isMobile ? {} : props;
 
-  const milestones = [
+  const milestones: {
+    id: string;
+    title: string;
+    description: string;
+    icon: any;
+    image: string;
+    srcSet?: string;
+    sizes?: string;
+  }[] = [
     {
       id: "01",
       title: "Pallabi, Mirpur",
       description: "What began in Pallabi laid the foundation of IZ Pâtisserie & Café. Built on care, precision, and genuine hospitality, this location established the values that continue to define the brand today.",
       icon: Store,
-      image: "https://images.unsplash.com/photo-1554118811-1e0d58224f24?q=80&w=800&auto=format&fit=crop"
+      image: "/images/pallabi-mirpur-768.jpg",
+      srcSet: "/images/pallabi-mirpur-400.jpg 400w, /images/pallabi-mirpur-768.jpg 768w",
+      sizes: "(max-width: 768px) 100vw, 50vw"
     },
     {
       id: "02",
       title: "Gulshan 2",
       description: "As IZ grew, the Gulshan 2 location brought the brand experience to a new audience while preserving the warmth, quality, and consistency that made the original café beloved.",
       icon: Coffee,
-      image: "https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?q=80&w=800&auto=format&fit=crop"
+      image: "/images/gulshan2-800.jpg",
+      srcSet: "/images/gulshan2-400.jpg 400w, /images/gulshan2-800.jpg 800w, /images/gulshan2-1024.jpg 1024w",
+      sizes: "(max-width: 768px) 100vw, 50vw"
     },
     {
       id: "03",
       title: "Dhanmondi 27",
       description: "The opening of Dhanmondi 27 marked another step in the journey, creating a refined yet welcoming environment where community, craftsmanship, and hospitality come together.",
       icon: UtensilsCrossed,
-      image: "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?q=80&w=800&auto=format&fit=crop"
+      image: "/images/dhanmondi27-800.jpg",
+      srcSet: "/images/dhanmondi27-400.jpg 400w, /images/dhanmondi27-800.jpg 800w, /images/dhanmondi27-1024.jpg 1024w",
+      sizes: "(max-width: 768px) 100vw, 50vw"
     },
     {
       id: "04",
@@ -358,6 +372,8 @@ function OurStoryContent() {
                         <div className="relative aspect-[16/10] w-full rounded-2xl overflow-hidden mb-6 bg-cream/30">
                           <img
                             src={milestone.image}
+                            srcSet={milestone.srcSet}
+                            sizes={milestone.sizes}
                             alt={milestone.title}
                             className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
                             loading="lazy"

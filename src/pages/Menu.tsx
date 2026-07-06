@@ -1,4 +1,4 @@
-import { useState, useEffect, useMemo } from "react";
+import { useState, useEffect, useMemo, useRef } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { Search, X, Loader2 } from "lucide-react";
 import { getMenuItems, getCategories, getImageUrl } from "../lib/supabase";
@@ -10,6 +10,9 @@ export default function Menu() {
   const [menuItems, setMenuItems] = useState<MenuItem[]>([]);
   const [categories, setCategories] = useState<Category[]>([]);
   const [isLoading, setIsLoading] = useState(true);
+
+  const isManualScrolling = useRef(false);
+  const scrollTimeout = useRef<number | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [izGrabUrl, setIzGrabUrl] = useState("https://grab.izcafe.com");
   const [izGrabEnabled, setIzGrabEnabled] = useState(true);
@@ -106,39 +109,87 @@ export default function Menu() {
     }).filter(p => p.items.length > 0 || p.children.length > 0);
   }, [mainCategories, subCategories, itemsByCategory]);
 
-  // Intersection Observer for Scroll Spy
+  // Scroll active tab into view when selectedCategoryId changes
+  useEffect(() => {
+    const activeTabButton = document.querySelector(`.category-tab-btn[data-category="${selectedCategoryId}"]`);
+    if (activeTabButton) {
+      activeTabButton.scrollIntoView({
+        behavior: "smooth",
+        block: "nearest",
+        inline: "center"
+      });
+    }
+  }, [selectedCategoryId]);
+
+  // Scroll Spy to track active category on scroll
   useEffect(() => {
     if (isLoading || groupedCategories.length === 0) return;
 
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            setSelectedCategoryId(entry.target.id);
-          }
-        });
-      },
-      {
-        rootMargin: "-20% 0px -70% 0px", // Trigger when section is near the top
-        threshold: 0
+    const handleScroll = () => {
+      if (isManualScrolling.current) return;
+
+      const scrollPosition = window.scrollY;
+      const windowHeight = window.innerHeight;
+      const documentHeight = document.documentElement.scrollHeight;
+
+      // 1. Near the top
+      if (scrollPosition < 120) {
+        setSelectedCategoryId(groupedCategories[0].id);
+        return;
       }
-    );
 
-    const sections = document.querySelectorAll(".menu-category-section");
-    sections.forEach((section) => observer.observe(section));
+      // 2. Near the bottom
+      if (scrollPosition + windowHeight >= documentHeight - 50) {
+        setSelectedCategoryId(groupedCategories[groupedCategories.length - 1].id);
+        return;
+      }
 
-    return () => observer.disconnect();
-  }, [isLoading, groupedCategories]);
+      // 3. Find which section is currently in view
+      const offset = 180; // slightly larger than 160 offset for buffer
+      let activeId = selectedCategoryId;
+
+      for (let i = 0; i < groupedCategories.length; i++) {
+        const section = document.getElementById(groupedCategories[i].id);
+        if (section) {
+          const top = section.getBoundingClientRect().top + scrollPosition;
+          if (scrollPosition >= top - offset) {
+            activeId = groupedCategories[i].id;
+          }
+        }
+      }
+
+      if (activeId !== selectedCategoryId) {
+        setSelectedCategoryId(activeId);
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    // Run once on load/mount/update
+    handleScroll();
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+      if (scrollTimeout.current) clearTimeout(scrollTimeout.current);
+    };
+  }, [isLoading, groupedCategories, selectedCategoryId]);
 
   const handleCategoryClick = (id: string) => {
     const element = document.getElementById(id);
     if (element) {
+      setSelectedCategoryId(id);
+      isManualScrolling.current = true;
+      if (scrollTimeout.current) clearTimeout(scrollTimeout.current);
+
       const offset = 160; // Offset for the sticky tabs
       const elementPosition = element.getBoundingClientRect().top + window.pageYOffset;
       window.scrollTo({
         top: elementPosition - offset,
         behavior: "smooth"
       });
+
+      scrollTimeout.current = window.setTimeout(() => {
+        isManualScrolling.current = false;
+      }, 800);
     }
   };
 
@@ -219,8 +270,9 @@ export default function Menu() {
             {mainCategories.map((category) => (
               <button
                 key={category.id}
+                data-category={category.id}
                 onClick={() => handleCategoryClick(category.id)}
-                className={`text-xs tracking-[0.2em] uppercase transition-all duration-300 relative pb-2 whitespace-nowrap ${
+                className={`category-tab-btn text-xs tracking-[0.2em] uppercase transition-all duration-300 relative pb-2 whitespace-nowrap ${
                   selectedCategoryId === category.id
                     ? "text-mocha font-bold"
                     : "text-charcoal/40 hover:text-charcoal"
@@ -282,7 +334,7 @@ export default function Menu() {
                   <>
                       <div className="space-y-32">
                         {groupedCategories.map((parent) => (
-                          <section key={parent.id} className="space-y-16">
+                          <section id={parent.id} key={parent.id} className="menu-category-section space-y-16">
                             {/* Parent Category Heading */}
                             <div className="flex items-center gap-6">
                               <h2 className="font-serif text-4xl md:text-5xl lg:text-6xl text-charcoal tracking-tight">

@@ -14,10 +14,8 @@ import {
   Heart, 
   Instagram, 
   Facebook, 
-  Linkedin,
   Sparkles,
-  ArrowRight,
-  Music
+  ArrowRight
 } from "lucide-react";
 
 // Error Boundary for page stability
@@ -349,24 +347,6 @@ function ContactContent() {
               aria-label="Facebook"
             >
               <Facebook size={22} strokeWidth={1.5} />
-            </a>
-            <a
-              href="https://tiktok.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="w-14 h-14 bg-white border border-[#c6a75e]/20 text-[#c6a75e] hover:bg-[#c6a75e] hover:text-cream rounded-full flex items-center justify-center shadow-soft hover:shadow-md hover:-translate-y-1 transition-all duration-300"
-              aria-label="TikTok"
-            >
-              <Music size={22} strokeWidth={1.5} />
-            </a>
-            <a
-              href="https://linkedin.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="w-14 h-14 bg-white border border-[#c6a75e]/20 text-[#c6a75e] hover:bg-[#c6a75e] hover:text-cream rounded-full flex items-center justify-center shadow-soft hover:shadow-md hover:-translate-y-1 transition-all duration-300"
-              aria-label="LinkedIn"
-            >
-              <Linkedin size={22} strokeWidth={1.5} />
             </a>
           </div>
         </motion.div>

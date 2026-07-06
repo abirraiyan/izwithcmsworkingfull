@@ -85,13 +85,24 @@ function GetToKnowUsContent() {
   ];
 
   // People Behind IZ data (Storytelling format)
-  const teamStories = [
+  const teamStories: {
+    label: string;
+    role: string;
+    title: string;
+    story: string;
+    image: string;
+    srcSet?: string;
+    sizes?: string;
+    quote: string;
+  }[] = [
     {
       label: "Crafted Daily",
       role: "The Pâtissiers",
       title: "Mastering the Fold",
       story: "Before the first light touches Dhaka, our pastry kitchen is already filled with the aroma of warming ovens. Here, pastry-making is treated as a precise, meditative science. Guided by traditional French methods, our pâtissiers dedicate their mornings to the details: folding premium cultured butter into cold dough, monitoring fermentation timings to the minute, and hand-shaping each layers-thin pastry. The result is a selection of croissants and pastries that shatter delicately at the first bite, revealing a perfect honeycomb structure inside.",
-      image: "https://images.unsplash.com/photo-1509440159596-0249088772ff?q=80&w=1200&auto=format&fit=crop",
+      image: "/images/mastering-fold-576.jpg",
+      srcSet: "/images/mastering-fold-400.jpg 400w, /images/mastering-fold-576.jpg 576w",
+      sizes: "(max-width: 768px) 100vw, 50vw",
       quote: "Quality isn't accidental. It's the daily repetition of doing small things perfectly."
     },
     {
@@ -107,7 +118,9 @@ function GetToKnowUsContent() {
       role: "The Curators",
       title: "Sustaining the Welcome",
       story: "At the heart of the IZ experience is our curation team—the faces who set the peaceful, welcoming tone of our sanctuaries. Understanding that a great café is defined by its human warmth, our curators focus on the quiet details of hospitality. They greet our regulars by name, arrange our visual spaces to foster calmness, and manage the daily flow so that each guest can find a moment of peace. They are the guardians of our signature promise: combining Caffeine & Kindness in every interaction.",
-      image: "https://images.unsplash.com/photo-1560066984-138dadb4c035?q=80&w=1200&auto=format&fit=crop",
+      image: "/images/sustaining-welcome-800.jpg",
+      srcSet: "/images/sustaining-welcome-400.jpg 400w, /images/sustaining-welcome-800.jpg 800w, /images/sustaining-welcome-1024.jpg 1024w",
+      sizes: "(max-width: 768px) 100vw, 50vw",
       quote: "True luxury is feeling entirely at home, even in the middle of a busy city."
     }
   ];
@@ -297,6 +310,8 @@ function GetToKnowUsContent() {
                     <div className="aspect-[4/5] sm:aspect-[16/10] lg:aspect-[4/5] rounded-[2.5rem] overflow-hidden shadow-2xl border border-charcoal/5 relative bg-mocha/10 group">
                       <img
                         src={story.image}
+                        srcSet={story.srcSet}
+                        sizes={story.sizes}
                         alt={story.role}
                         className="w-full h-full object-cover transition-transform duration-[2000ms] ease-out group-hover:scale-105 filter sepia-[15%] contrast-[1.02] brightness-[0.98]"
                         loading="lazy"
