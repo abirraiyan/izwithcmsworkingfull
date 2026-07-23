@@ -80,7 +80,7 @@ export default function BrandStory({ content }: BrandStoryProps) {
                 <div className="flex items-center gap-6">
                   <div className="w-16 h-16 rounded-full overflow-hidden bg-mocha/20 flex-shrink-0">
                     <img
-                      src={content?.founder_avatar || "https://images.unsplash.com/photo-1583338917451-face2751d8d5?q=80&w=400&auto=format&fit=crop"}
+                      src={content?.founder_avatar || "https://res.cloudinary.com/djnv9soqm/image/upload/v1784783805/l5syr3jfimkdndrysq7a.jpg"}
                       alt={content?.founder_name || "Founder"}
                       className="w-full h-full object-cover grayscale"
                       referrerPolicy="no-referrer"
@@ -88,10 +88,10 @@ export default function BrandStory({ content }: BrandStoryProps) {
                   </div>
                   <div>
                     <p className="font-serif text-xl text-charcoal">
-                      {content?.founder_name || "Ibrahim Z."}
+                      {content?.founder_name || "Israt Zisan."}
                     </p>
                     <p className="text-sm tracking-widest uppercase text-charcoal/60 font-semibold">
-                      {content?.founder_role || "Founder & Head Baker"}
+                      {content?.founder_role || "Founder & CEO"}
                     </p>
                   </div>
                 </div>
