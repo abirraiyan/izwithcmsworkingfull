@@ -109,14 +109,18 @@ export default function Menu() {
     }).filter(p => p.items.length > 0 || p.children.length > 0);
   }, [mainCategories, subCategories, itemsByCategory]);
 
-  // Scroll active tab into view when selectedCategoryId changes
+  // Scroll active tab into view when selectedCategoryId changes (horizontal only)
   useEffect(() => {
-    const activeTabButton = document.querySelector(`.category-tab-btn[data-category="${selectedCategoryId}"]`);
-    if (activeTabButton) {
-      activeTabButton.scrollIntoView({
-        behavior: "smooth",
-        block: "nearest",
-        inline: "center"
+    const activeTabButton = document.querySelector(`.category-tab-btn[data-category="${selectedCategoryId}"]`) as HTMLElement;
+    const container = activeTabButton?.closest(".overflow-x-auto") as HTMLElement;
+    if (activeTabButton && container) {
+      const containerRect = container.getBoundingClientRect();
+      const buttonRect = activeTabButton.getBoundingClientRect();
+      
+      const scrollLeft = activeTabButton.offsetLeft - (containerRect.width / 2) + (buttonRect.width / 2);
+      container.scrollTo({
+        left: scrollLeft,
+        behavior: "smooth"
       });
     }
   }, [selectedCategoryId]);
@@ -310,7 +314,7 @@ export default function Menu() {
           ) : (
             <AnimatePresence mode="wait">
               <motion.div
-                key={`${selectedCategoryId}-${debouncedSearchQuery}`}
+                key={debouncedSearchQuery}
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -20 }}
